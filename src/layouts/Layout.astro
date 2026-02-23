@@ -1,0 +1,71 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  emoji?: string;
+}
+const { title, description = "Lerne Geheimcodes und Chiffren — für Kinder von 8 bis 12!", emoji = "🔐" } = Astro.props;
+const pages = [
+  { href: "/", label: "🏠 Start", color: "bg-candy-yellow" },
+  { href: "/caesar", label: "🏛️ Caesar", color: "bg-candy-orange" },
+  { href: "/morse", label: "📡 Morse", color: "bg-candy-blue" },
+  { href: "/zahlen", label: "🔢 Zahlen", color: "bg-candy-green" },
+  { href: "/spiegel", label: "🪞 Spiegel", color: "bg-candy-pink" },
+  { href: "/pigpen", label: "🏗️ Pigpen", color: "bg-candy-purple" },
+  { href: "/skytale", label: "📜 Skytale", color: "bg-candy-red" },
+  { href: "/emoji", label: "😎 Emoji", color: "bg-candy-yellow" },
+];
+const currentPath = Astro.url.pathname;
+---
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>{emoji} {title} — Codes4Children</title>
+</head>
+<body class="min-h-screen">
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-lg border-b-4 border-candy-purple">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center justify-between h-16">
+        <a href="/" class="text-2xl font-fun font-bold rainbow-text hover:animate-wiggle">
+          🔐 Codes4Children
+        </a>
+        <button id="menu-toggle" class="md:hidden text-3xl" aria-label="Menü">☰</button>
+      </div>
+      <div id="mobile-menu" class="hidden md:flex flex-wrap gap-2 pb-3 justify-center">
+        {pages.map(p => (
+          <a href={p.href}
+             class:list={[
+               "px-3 py-1.5 rounded-full text-sm font-bold transition-all hover:scale-110",
+               currentPath === p.href ? `${p.color} text-white shadow-lg scale-105` : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+             ]}>
+            {p.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <slot />
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-8 mt-16 bg-gradient-to-r from-candy-purple/10 via-candy-pink/10 to-candy-blue/10 border-t-4 border-dashed border-candy-purple/20">
+    <p class="text-lg font-fun">🔐 Codes4Children — Geheimcodes für schlaue Köpfe! 🧠</p>
+    <p class="text-sm text-gray-500 mt-2">Mit 💜 gemacht für neugierige Kinder</p>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    toggle?.addEventListener('click', () => {
+      menu?.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

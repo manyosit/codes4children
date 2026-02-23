@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Spiegelschrift" emoji="🪞">
+  <div class="text-center mb-8">
+    <div class="text-7xl mb-4">🪞</div>
+    <h1 class="text-5xl font-fun font-bold rainbow-text">Spiegelschrift</h1>
+    <p class="text-xl text-gray-600 mt-4 max-w-2xl mx-auto">
+      Leonardo da Vinci — der berühmte Erfinder und Künstler — schrieb seine geheimen
+      Notizbücher komplett in Spiegelschrift! Man braucht einen Spiegel zum Lesen! 🎨
+    </p>
+  </div>
+
+  <!-- How it works -->
+  <div class="bg-white rounded-3xl p-8 shadow-xl mb-8">
+    <h2 class="text-3xl font-fun font-bold text-candy-pink mb-4">📖 So funktioniert's</h2>
+    <p class="text-lg mb-4">Spiegelschrift ist Text, der <strong>rückwärts</strong> geschrieben wird. Du kannst ihn lesen, wenn du ihn vor einen Spiegel hältst!</p>
+    <div class="bg-candy-pink/10 rounded-2xl p-6 text-center">
+      <p class="text-2xl mb-2">Normal: <strong class="text-3xl">GEHEIM</strong></p>
+      <p class="text-2xl">Gespiegelt: <strong class="text-3xl text-candy-pink" style="direction: rtl; unicode-bidi: bidi-override;">GEHEIM</strong></p>
+    </div>
+  </div>
+
+  <!-- Interactive Tool -->
+  <div class="bg-gradient-to-br from-candy-pink/20 to-rose-200/30 rounded-3xl p-8 shadow-xl mb-8">
+    <h2 class="text-3xl font-fun font-bold text-candy-pink mb-6">🔧 Spiegel-Maschine</h2>
+
+    <div class="mb-6">
+      <label class="block text-lg font-bold mb-2">📝 Dein Text:</label>
+      <input type="text" id="mirror-input" placeholder="Schreibe hier..." class="tool-input" maxlength="50" />
+    </div>
+
+    <button id="btn-mirror" class="btn-fun bg-gradient-to-r from-candy-pink to-rose-400 mb-6">
+      🪞 Spiegeln!
+    </button>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <label class="block text-lg font-bold mb-2">🔄 Rückwärts:</label>
+        <div id="mirror-reversed" class="tool-output text-2xl font-bold text-candy-pink text-center">...</div>
+      </div>
+      <div>
+        <label class="block text-lg font-bold mb-2">🪞 Echte Spiegelschrift:</label>
+        <div id="mirror-flipped" class="tool-output text-2xl font-bold text-candy-purple text-center" style="transform: scaleX(-1);">...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fun with CSS mirror -->
+  <div class="bg-white rounded-3xl p-8 shadow-xl mb-8 text-center">
+    <h2 class="text-3xl font-fun font-bold text-candy-pink mb-4">🎭 Live-Spiegel</h2>
+    <p class="text-lg mb-4">Tippe etwas und sieh es in Echtzeit gespiegelt:</p>
+    <input type="text" id="live-input" placeholder="Tippe hier..." class="tool-input text-center text-3xl mb-4" maxlength="30" />
+    <div id="live-mirror" class="text-5xl font-bold text-candy-purple py-8 bg-gradient-to-b from-candy-pink/5 to-candy-purple/10 rounded-2xl" style="transform: scaleX(-1);">
+      ...
+    </div>
+  </div>
+
+  <!-- Leonardo -->
+  <div class="bg-gradient-to-r from-candy-yellow/20 to-candy-orange/20 rounded-3xl p-8 shadow-xl">
+    <h2 class="text-3xl font-fun font-bold text-candy-orange mb-4">🎨 Wusstest du?</h2>
+    <div class="space-y-4 text-lg">
+      <p>🧑‍🎨 <strong>Leonardo da Vinci</strong> war Linkshänder und schrieb fast alle seine Notizen in Spiegelschrift — über 13.000 Seiten!</p>
+      <p>🤔 Forscher sind sich nicht einig, ob er es tat, um seine Ideen geheim zu halten, oder weil es für Linkshänder einfach bequemer war.</p>
+      <p>💡 <strong>Probier's aus:</strong> Nimm Stift und Papier und versuche, deinen Namen in Spiegelschrift zu schreiben. Halte ihn dann vor einen Spiegel!</p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('btn-mirror')!.addEventListener('click', () => {
+      const text = (document.getElementById('mirror-input') as HTMLInputElement).value;
+      document.getElementById('mirror-reversed')!.textContent = text.split('').reverse().join('') || '...';
+      document.getElementById('mirror-flipped')!.textContent = text || '...';
+    });
+
+    document.getElementById('live-input')!.addEventListener('input', (e) => {
+      const text = (e.target as HTMLInputElement).value;
+      document.getElementById('live-mirror')!.textContent = text || '...';
+    });
+  </script>
+</Layout>

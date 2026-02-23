@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+const codes = [
+  { href: "/caesar", emoji: "🏛️", title: "Caesar-Chiffre", desc: "Verschiebe das Alphabet wie ein römischer Kaiser!", color: "from-candy-orange to-yellow-400" },
+  { href: "/morse", emoji: "📡", title: "Morse-Code", desc: "Punkte und Striche — die Sprache der Funker!", color: "from-candy-blue to-cyan-400" },
+  { href: "/zahlen", emoji: "🔢", title: "Zahlen-Code", desc: "A=1, B=2 — verschlüssle mit Mathe!", color: "from-candy-green to-emerald-400" },
+  { href: "/spiegel", emoji: "🪞", title: "Spiegelschrift", desc: "Schreibe rückwärts wie Leonardo da Vinci!", color: "from-candy-pink to-rose-400" },
+  { href: "/pigpen", emoji: "🏗️", title: "Freimaurer-Chiffre", desc: "Geheime Zeichen statt Buchstaben!", color: "from-candy-purple to-violet-400" },
+  { href: "/skytale", emoji: "📜", title: "Skytale", desc: "Die antike Verschlüsselung der Spartaner!", color: "from-candy-red to-red-400" },
+  { href: "/emoji", emoji: "😎", title: "Emoji-Code", desc: "Erstelle deine eigene Geheimsprache!", color: "from-candy-yellow to-amber-400" },
+];
+---
+<Layout title="Willkommen" emoji="🏠">
+  <!-- Hero -->
+  <section class="text-center py-12">
+    <div class="text-8xl mb-6 animate-bounce-slow">🕵️</div>
+    <h1 class="text-5xl md:text-7xl font-fun font-bold rainbow-text mb-4">
+      Geheimcodes & Chiffren
+    </h1>
+    <p class="text-2xl md:text-3xl font-fun text-gray-700 mb-2">
+      Willkommen in der Welt der Geheimnisse! 🤫
+    </p>
+    <p class="text-lg text-gray-500 max-w-2xl mx-auto mt-4">
+      Schon seit Tausenden von Jahren verschlüsseln Menschen ihre Nachrichten.
+      Könige, Spione, Piraten und sogar Kinder — alle lieben Geheimcodes!
+      Hier lernst du die coolsten Verschlüsselungen kennen und kannst sie
+      <strong>selbst ausprobieren</strong>! 🚀
+    </p>
+  </section>
+
+  <!-- Code Cards -->
+  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+    {codes.map((code, i) => (
+      <a href={code.href}
+         class="card-hover block rounded-3xl overflow-hidden shadow-xl"
+         style={`animation-delay: ${i * 100}ms`}>
+        <div class={`bg-gradient-to-br ${code.color} p-8 text-center`}>
+          <div class="text-6xl mb-4">{code.emoji}</div>
+          <h2 class="text-2xl font-fun font-bold text-white drop-shadow-md">{code.title}</h2>
+        </div>
+        <div class="bg-white p-4">
+          <p class="text-gray-600 text-center">{code.desc}</p>
+          <p class="text-center mt-3 text-candy-purple font-bold">Jetzt entdecken →</p>
+        </div>
+      </a>
+    ))}
+  </section>
+
+  <!-- Fun Facts -->
+  <section class="mt-16 bg-gradient-to-r from-candy-purple/10 to-candy-pink/10 rounded-3xl p-8">
+    <h2 class="text-3xl font-fun font-bold text-center mb-6">🤯 Wusstest du schon?</h2>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-white rounded-2xl p-6 shadow-md">
+        <p class="text-4xl mb-2">🏛️</p>
+        <p><strong>Julius Caesar</strong> hat schon vor über 2000 Jahren geheime Nachrichten an seine Generäle geschickt!</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-md">
+        <p class="text-4xl mb-2">🐝</p>
+        <p>Sogar <strong>Bienen</strong> kommunizieren mit einem Geheimcode — sie tanzen, um anderen den Weg zu Blumen zu zeigen!</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-md">
+        <p class="text-4xl mb-2">💻</p>
+        <p>Dein <strong>Handy</strong> verschlüsselt jede Nachricht automatisch — sonst könnte jeder mitlesen!</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-md">
+        <p class="text-4xl mb-2">🏴‍☠️</p>
+        <p><strong>Piraten</strong> benutzten Geheimcodes auf ihren Schatzkarten, damit nur sie den Schatz finden konnten!</p>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,159 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Emoji-Code" emoji="😎">
+  <div class="text-center mb-8">
+    <div class="text-7xl mb-4">😎</div>
+    <h1 class="text-5xl font-fun font-bold rainbow-text">Emoji-Code</h1>
+    <p class="text-xl text-gray-600 mt-4 max-w-2xl mx-auto">
+      Erstelle deine eigene Geheimsprache mit Emojis! Nur wer den Schlüssel kennt,
+      kann deine Nachrichten lesen! 🤫✨
+    </p>
+  </div>
+
+  <!-- How it works -->
+  <div class="bg-white rounded-3xl p-8 shadow-xl mb-8">
+    <h2 class="text-3xl font-fun font-bold text-candy-yellow mb-4">📖 So funktioniert's</h2>
+    <p class="text-lg mb-4">Jeder Buchstabe bekommt ein Emoji zugewiesen. Hier ist ein Beispiel-Schlüssel:</p>
+    <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-13 gap-2" id="emoji-key"></div>
+  </div>
+
+  <!-- Interactive Tool -->
+  <div class="bg-gradient-to-br from-candy-yellow/20 to-amber-200/30 rounded-3xl p-8 shadow-xl mb-8">
+    <h2 class="text-3xl font-fun font-bold text-candy-yellow mb-6">🔧 Emoji-Übersetzer</h2>
+
+    <div class="mb-4">
+      <label class="block text-lg font-bold mb-2">🎨 Emoji-Set wählen:</label>
+      <div class="flex flex-wrap gap-3">
+        <button class="emoji-set-btn btn-fun bg-gradient-to-r from-candy-yellow to-amber-400 text-sm" data-set="animals">🐱 Tiere</button>
+        <button class="emoji-set-btn btn-fun bg-gradient-to-r from-candy-pink to-rose-400 text-sm" data-set="food">🍕 Essen</button>
+        <button class="emoji-set-btn btn-fun bg-gradient-to-r from-candy-blue to-cyan-400 text-sm" data-set="space">🚀 Weltraum</button>
+        <button class="emoji-set-btn btn-fun bg-gradient-to-r from-candy-green to-emerald-400 text-sm" data-set="nature">🌸 Natur</button>
+        <button class="emoji-set-btn btn-fun bg-gradient-to-r from-candy-purple to-violet-400 text-sm" data-set="faces">😀 Gesichter</button>
+      </div>
+    </div>
+
+    <div class="mb-6">
+      <label class="block text-lg font-bold mb-2">📝 Deine Nachricht:</label>
+      <input type="text" id="emoji-input" placeholder="Schreibe hier..." class="tool-input" maxlength="50" />
+    </div>
+
+    <div class="flex gap-4 mb-6 flex-wrap">
+      <button id="btn-to-emoji" class="btn-fun bg-gradient-to-r from-candy-yellow to-amber-400">
+        😎 In Emojis umwandeln
+      </button>
+      <button id="btn-from-emoji" class="btn-fun bg-gradient-to-r from-candy-purple to-candy-pink">
+        📝 Emojis entschlüsseln
+      </button>
+    </div>
+
+    <div>
+      <label class="block text-lg font-bold mb-2">✨ Ergebnis:</label>
+      <div id="emoji-output" class="tool-output text-3xl text-center tracking-wider">
+        Hier erscheint dein Emoji-Code...
+      </div>
+    </div>
+
+    <button id="btn-copy" class="btn-fun bg-gradient-to-r from-gray-400 to-gray-500 mt-4 text-sm">
+      📋 Kopieren
+    </button>
+  </div>
+
+  <!-- Create your own -->
+  <div class="bg-gradient-to-r from-candy-purple/20 to-candy-pink/20 rounded-3xl p-8 shadow-xl mb-8">
+    <h2 class="text-3xl font-fun font-bold text-candy-purple mb-4">🎨 Eigenen Schlüssel erstellen</h2>
+    <p class="text-lg mb-4">Klicke auf "Mischen" für einen zufälligen Schlüssel!</p>
+    <button id="btn-shuffle" class="btn-fun bg-gradient-to-r from-candy-purple to-candy-pink mb-4">
+      🔀 Mischen!
+    </button>
+    <div id="custom-key" class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-13 gap-2"></div>
+  </div>
+
+  <!-- Tips -->
+  <div class="bg-gradient-to-r from-candy-green/20 to-candy-blue/20 rounded-3xl p-8 shadow-xl">
+    <h2 class="text-3xl font-fun font-bold text-candy-green mb-4">💡 Tipps für Profis</h2>
+    <div class="space-y-3 text-lg">
+      <p>📱 Schicke Emoji-Nachrichten über WhatsApp — niemand weiß, was sie bedeuten!</p>
+      <p>📝 Schreibe den Schlüssel auf und gib ihn nur deinen besten Freunden!</p>
+      <p>🔄 Wechsle den Schlüssel regelmäßig für extra Sicherheit!</p>
+      <p>🤹 Mische verschiedene Emoji-Sets für einen einzigartigen Code!</p>
+    </div>
+  </div>
+
+  <script>
+    const ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const emojiSets: Record<string, string[]> = {
+      animals: ['🐱','🐶','🐭','🐹','🐰','🦊','🐻','🐼','🐨','🐯','🦁','🐮','🐷','🐸','🐵','🐔','🐧','🐦','🐤','🦋','🐌','🐛','🐝','🐞','🦄','🐢'],
+      food: ['🍎','🍐','🍊','🍋','🍌','🍉','🍇','🍓','🫐','🍒','🥝','🍕','🌮','🍔','🌭','🍩','🧁','🍪','🍫','🍿','🥨','🥕','🌽','🍄','🥑','🍰'],
+      space: ['🚀','🌍','🌙','⭐','🌟','💫','☄️','🪐','🌞','🌛','🌠','🔭','👽','🛸','🌌','✨','🌈','⚡','🔥','💎','🎆','🌊','❄️','🌪️','☀️','🌑'],
+      nature: ['🌸','🌺','🌻','🌹','🌷','🌼','🍀','🌿','🍃','🌴','🌵','🍁','🍂','🌾','🎋','🎍','🪻','🪷','🌱','🪴','🍄','🌲','🌳','🪨','💐','🌎'],
+      faces: ['😀','😃','😄','😁','😆','😅','🤣','😂','🙂','😉','😊','😇','🥰','😍','🤩','😘','😋','😛','🤔','🤗','🤫','😎','🥳','😏','😌','🤓'],
+    };
+
+    let currentSet = 'animals';
+    let currentEmojis = [...emojiSets[currentSet]];
+
+    function updateKeyDisplay() {
+      const keyDiv = document.getElementById('emoji-key')!;
+      keyDiv.innerHTML = ALPHA.split('').map((letter, i) =>
+        `<div class="bg-candy-yellow/10 rounded-xl p-2 text-center">
+          <div class="text-xl font-bold">${letter}</div>
+          <div class="text-2xl">${currentEmojis[i]}</div>
+        </div>`
+      ).join('');
+
+      document.getElementById('custom-key')!.innerHTML = keyDiv.innerHTML;
+    }
+
+    // Set buttons
+    document.querySelectorAll('.emoji-set-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentSet = (btn as HTMLElement).dataset.set!;
+        currentEmojis = [...emojiSets[currentSet]];
+        updateKeyDisplay();
+      });
+    });
+
+    // Shuffle
+    document.getElementById('btn-shuffle')!.addEventListener('click', () => {
+      for (let i = currentEmojis.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [currentEmojis[i], currentEmojis[j]] = [currentEmojis[j], currentEmojis[i]];
+      }
+      updateKeyDisplay();
+    });
+
+    // Encode
+    document.getElementById('btn-to-emoji')!.addEventListener('click', () => {
+      const text = (document.getElementById('emoji-input') as HTMLInputElement).value.toUpperCase();
+      const result = text.split('').map(c => {
+        if (c === ' ') return '  ';
+        const i = ALPHA.indexOf(c);
+        return i >= 0 ? currentEmojis[i] : c;
+      }).join('');
+      document.getElementById('emoji-output')!.textContent = result || 'Schreibe erst etwas! ☝️';
+    });
+
+    // Decode
+    document.getElementById('btn-from-emoji')!.addEventListener('click', () => {
+      const text = (document.getElementById('emoji-input') as HTMLInputElement).value;
+      const result = [...text].map(c => {
+        if (c === ' ') return ' ';
+        const i = currentEmojis.indexOf(c);
+        return i >= 0 ? ALPHA[i] : c;
+      }).join('');
+      document.getElementById('emoji-output')!.textContent = result || 'Gib Emojis ein! ☝️';
+    });
+
+    // Copy
+    document.getElementById('btn-copy')!.addEventListener('click', () => {
+      const text = document.getElementById('emoji-output')!.textContent || '';
+      navigator.clipboard.writeText(text);
+      const btn = document.getElementById('btn-copy')!;
+      btn.textContent = '✅ Kopiert!';
+      setTimeout(() => btn.textContent = '📋 Kopieren', 2000);
+    });
+
+    updateKeyDisplay();
+  </script>
+</Layout>

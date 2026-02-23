@@ -1,0 +1,174 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Morse-Code" emoji="📡">
+  <div class="text-center mb-8">
+    <div class="text-7xl mb-4">📡</div>
+    <h1 class="text-5xl font-fun font-bold rainbow-text">Morse-Code</h1>
+    <p class="text-xl text-gray-600 mt-4 max-w-2xl mx-auto">
+      Punkte und Striche — damit wurde früher über riesige Entfernungen kommuniziert!
+      Per Funk, Lichtsignal oder sogar durch Klopfen an die Wand! 🔦
+    </p>
+  </div>
+
+  <!-- Morse table -->
+  <div class="bg-white rounded-3xl p-8 shadow-xl mb-8">
+    <h2 class="text-3xl font-fun font-bold text-candy-blue mb-4">📋 Das Morse-Alphabet</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3" id="morse-table">
+    </div>
+    <div class="mt-4 text-center text-gray-500">
+      <p>⚫ = kurzes Signal (dit) &nbsp; ➖ = langes Signal (dah)</p>
+    </div>
+  </div>
+
+  <!-- Interactive Tool -->
+  <div class="bg-gradient-to-br from-candy-blue/20 to-cyan-200/30 rounded-3xl p-8 shadow-xl mb-8">
+    <h2 class="text-3xl font-fun font-bold text-candy-blue mb-6">🔧 Morse-Übersetzer</h2>
+
+    <div class="mb-6">
+      <label class="block text-lg font-bold mb-2">📝 Dein Text:</label>
+      <input type="text" id="morse-input" placeholder="Schreibe hier..."
+             class="tool-input" maxlength="50" />
+    </div>
+
+    <div class="flex gap-4 mb-6 flex-wrap">
+      <button id="btn-to-morse" class="btn-fun bg-gradient-to-r from-candy-blue to-cyan-400">
+        📡 In Morse umwandeln
+      </button>
+      <button id="btn-play-morse" class="btn-fun bg-gradient-to-r from-candy-green to-emerald-400">
+        🔊 Abspielen
+      </button>
+      <button id="btn-flash-morse" class="btn-fun bg-gradient-to-r from-candy-yellow to-amber-400 text-gray-800">
+        💡 Blinken!
+      </button>
+    </div>
+
+    <div>
+      <label class="block text-lg font-bold mb-2">✨ Morse-Code:</label>
+      <div id="morse-output" class="tool-output text-2xl font-mono text-candy-blue text-center tracking-widest">
+        ⚫ ➖ ⚫ ⚫ ...
+      </div>
+    </div>
+
+    <!-- Flash display -->
+    <div id="flash-area" class="hidden mt-6 rounded-3xl h-32 flex items-center justify-center text-4xl font-bold transition-all duration-100"
+         style="background: #222; color: white;">
+      💡
+    </div>
+  </div>
+
+  <!-- SOS -->
+  <div class="bg-gradient-to-r from-candy-red/20 to-candy-orange/20 rounded-3xl p-8 shadow-xl">
+    <h2 class="text-3xl font-fun font-bold text-candy-red mb-4">🆘 Das berühmteste Morse-Signal</h2>
+    <p class="text-lg mb-4">
+      <strong>SOS</strong> ist das internationale Notsignal. Es ist super einfach zu merken:
+    </p>
+    <div class="bg-white rounded-2xl p-6 text-center">
+      <p class="text-4xl font-mono font-bold tracking-widest">⚫⚫⚫ ➖➖➖ ⚫⚫⚫</p>
+      <p class="text-xl mt-2">drei kurz — drei lang — drei kurz</p>
+    </div>
+    <p class="mt-4 text-gray-600">
+      💡 <strong>Tipp:</strong> Du kannst SOS auch mit einer Taschenlampe signalisieren:
+      3× kurz blinken, 3× lang blinken, 3× kurz blinken!
+    </p>
+  </div>
+
+  <script>
+    const MORSE: Record<string, string> = {
+      'A':'.-','B':'-...','C':'-.-.','D':'-..','E':'.','F':'..-.','G':'--.','H':'....','I':'..','J':'.---',
+      'K':'-.-','L':'.-..','M':'--','N':'-.','O':'---','P':'.--.','Q':'--.-','R':'.-.','S':'...','T':'-',
+      'U':'..-','V':'...-','W':'.--','X':'-..-','Y':'-.--','Z':'--..','0':'-----','1':'.----','2':'..---',
+      '3':'...--','4':'....-','5':'.....','6':'-....','7':'--...','8':'---..','9':'----.','Ä':'.-.-',
+      'Ö':'---.','Ü':'..--'
+    };
+
+    // Build table
+    const table = document.getElementById('morse-table')!;
+    Object.entries(MORSE).forEach(([letter, code]) => {
+      const visual = code.replace(/\./g, '⚫').replace(/-/g, '➖');
+      table.innerHTML += `<div class="bg-candy-blue/10 rounded-xl p-3 text-center">
+        <div class="text-2xl font-bold">${letter}</div>
+        <div class="text-lg tracking-wider">${visual}</div>
+      </div>`;
+    });
+
+    function textToMorse(text: string): string {
+      return text.toUpperCase().split('').map(c => {
+        if (c === ' ') return ' / ';
+        const m = MORSE[c];
+        return m ? m.replace(/\./g, '⚫').replace(/-/g, '➖') : '';
+      }).join(' ');
+    }
+
+    function textToMorseRaw(text: string): string {
+      return text.toUpperCase().split('').map(c => {
+        if (c === ' ') return '/';
+        return MORSE[c] || '';
+      }).join(' ');
+    }
+
+    const input = document.getElementById('morse-input') as HTMLInputElement;
+    const output = document.getElementById('morse-output')!;
+
+    document.getElementById('btn-to-morse')!.addEventListener('click', () => {
+      output.textContent = textToMorse(input.value) || 'Schreibe erst etwas oben rein! ☝️';
+    });
+
+    // Audio playback
+    document.getElementById('btn-play-morse')!.addEventListener('click', async () => {
+      const raw = textToMorseRaw(input.value);
+      if (!raw) return;
+      const ctx = new AudioContext();
+      let time = ctx.currentTime;
+      const dot = 0.1, dash = 0.3, gap = 0.1, letterGap = 0.3, wordGap = 0.7;
+
+      for (const char of raw) {
+        if (char === '.') {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain).connect(ctx.destination);
+          osc.frequency.value = 600;
+          osc.start(time);
+          osc.stop(time + dot);
+          time += dot + gap;
+        } else if (char === '-') {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain).connect(ctx.destination);
+          osc.frequency.value = 600;
+          osc.start(time);
+          osc.stop(time + dash);
+          time += dash + gap;
+        } else if (char === '/') {
+          time += wordGap;
+        } else if (char === ' ') {
+          time += letterGap;
+        }
+      }
+    });
+
+    // Flash
+    document.getElementById('btn-flash-morse')!.addEventListener('click', async () => {
+      const raw = textToMorseRaw(input.value);
+      if (!raw) return;
+      const flash = document.getElementById('flash-area')!;
+      flash.classList.remove('hidden');
+      const dot = 150, dash = 450, gap = 150, letterGap = 350, wordGap = 700;
+
+      for (const char of raw) {
+        if (char === '.' || char === '-') {
+          flash.style.background = '#FFD93D';
+          flash.textContent = '💡✨';
+          await new Promise(r => setTimeout(r, char === '.' ? dot : dash));
+          flash.style.background = '#222';
+          flash.textContent = '💡';
+          await new Promise(r => setTimeout(r, gap));
+        } else if (char === '/') {
+          await new Promise(r => setTimeout(r, wordGap));
+        } else if (char === ' ') {
+          await new Promise(r => setTimeout(r, letterGap));
+        }
+      }
+    });
+  </script>
+</Layout>

@@ -1,0 +1,150 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Freimaurer-Chiffre" emoji="🏗️">
+  <div class="text-center mb-8">
+    <div class="text-7xl mb-4">🏗️</div>
+    <h1 class="text-5xl font-fun font-bold rainbow-text">Freimaurer-Chiffre</h1>
+    <p class="text-xl text-gray-600 mt-4 max-w-2xl mx-auto">
+      Auch "Pigpen" genannt! Diese Chiffre ersetzt Buchstaben durch geometrische Symbole.
+      Sie sieht aus wie eine Geheimsprache aus einem Abenteuerfilm! 🗝️
+    </p>
+  </div>
+
+  <!-- How it works -->
+  <div class="bg-white rounded-3xl p-8 shadow-xl mb-8">
+    <h2 class="text-3xl font-fun font-bold text-candy-purple mb-4">📖 Das Geheimnis der Gitter</h2>
+    <p class="text-lg mb-4">Die Buchstaben werden in zwei Gitter und zwei X-Formen verteilt. Jeder Buchstabe bekommt das Stück vom Gitter, in dem er sitzt:</p>
+
+    <div class="grid md:grid-cols-2 gap-6 mb-6">
+      <!-- Grid 1 -->
+      <div class="bg-candy-purple/10 rounded-2xl p-6 text-center">
+        <h3 class="font-bold text-xl mb-3">Gitter 1 (ohne Punkt)</h3>
+        <svg viewBox="0 0 180 180" class="w-48 h-48 mx-auto">
+          <line x1="60" y1="0" x2="60" y2="180" stroke="#C44DFF" stroke-width="3"/>
+          <line x1="120" y1="0" x2="120" y2="180" stroke="#C44DFF" stroke-width="3"/>
+          <line x1="0" y1="60" x2="180" y2="60" stroke="#C44DFF" stroke-width="3"/>
+          <line x1="0" y1="120" x2="180" y2="120" stroke="#C44DFF" stroke-width="3"/>
+          <text x="30" y="40" text-anchor="middle" font-size="24" fill="#333">A</text>
+          <text x="90" y="40" text-anchor="middle" font-size="24" fill="#333">B</text>
+          <text x="150" y="40" text-anchor="middle" font-size="24" fill="#333">C</text>
+          <text x="30" y="100" text-anchor="middle" font-size="24" fill="#333">D</text>
+          <text x="90" y="100" text-anchor="middle" font-size="24" fill="#333">E</text>
+          <text x="150" y="100" text-anchor="middle" font-size="24" fill="#333">F</text>
+          <text x="30" y="160" text-anchor="middle" font-size="24" fill="#333">G</text>
+          <text x="90" y="160" text-anchor="middle" font-size="24" fill="#333">H</text>
+          <text x="150" y="160" text-anchor="middle" font-size="24" fill="#333">I</text>
+        </svg>
+      </div>
+      <!-- Grid 2 -->
+      <div class="bg-candy-pink/10 rounded-2xl p-6 text-center">
+        <h3 class="font-bold text-xl mb-3">Gitter 2 (mit Punkt)</h3>
+        <svg viewBox="0 0 180 180" class="w-48 h-48 mx-auto">
+          <line x1="60" y1="0" x2="60" y2="180" stroke="#FF6B9D" stroke-width="3"/>
+          <line x1="120" y1="0" x2="120" y2="180" stroke="#FF6B9D" stroke-width="3"/>
+          <line x1="0" y1="60" x2="180" y2="60" stroke="#FF6B9D" stroke-width="3"/>
+          <line x1="0" y1="120" x2="180" y2="120" stroke="#FF6B9D" stroke-width="3"/>
+          <text x="30" y="40" text-anchor="middle" font-size="24" fill="#333">J</text>
+          <text x="90" y="40" text-anchor="middle" font-size="24" fill="#333">K</text>
+          <text x="150" y="40" text-anchor="middle" font-size="24" fill="#333">L</text>
+          <text x="30" y="100" text-anchor="middle" font-size="24" fill="#333">M</text>
+          <text x="90" y="100" text-anchor="middle" font-size="24" fill="#333">N</text>
+          <text x="150" y="100" text-anchor="middle" font-size="24" fill="#333">O</text>
+          <text x="30" y="160" text-anchor="middle" font-size="24" fill="#333">P</text>
+          <text x="90" y="160" text-anchor="middle" font-size="24" fill="#333">Q</text>
+          <text x="150" y="160" text-anchor="middle" font-size="24" fill="#333">R</text>
+          <circle cx="30" cy="28" r="4" fill="#FF6B9D"/>
+          <circle cx="90" cy="28" r="4" fill="#FF6B9D"/>
+          <circle cx="150" cy="28" r="4" fill="#FF6B9D"/>
+          <circle cx="30" cy="88" r="4" fill="#FF6B9D"/>
+          <circle cx="90" cy="88" r="4" fill="#FF6B9D"/>
+          <circle cx="150" cy="88" r="4" fill="#FF6B9D"/>
+          <circle cx="30" cy="148" r="4" fill="#FF6B9D"/>
+          <circle cx="90" cy="148" r="4" fill="#FF6B9D"/>
+          <circle cx="150" cy="148" r="4" fill="#FF6B9D"/>
+        </svg>
+      </div>
+    </div>
+
+    <p class="text-lg">Jeder Buchstabe wird durch die <strong>Linien um ihn herum</strong> dargestellt. Buchstaben im zweiten Gitter bekommen zusätzlich einen <strong>Punkt</strong>!</p>
+  </div>
+
+  <!-- Interactive encoder -->
+  <div class="bg-gradient-to-br from-candy-purple/20 to-violet-200/30 rounded-3xl p-8 shadow-xl mb-8">
+    <h2 class="text-3xl font-fun font-bold text-candy-purple mb-6">🔧 Pigpen-Übersetzer</h2>
+
+    <div class="mb-6">
+      <label class="block text-lg font-bold mb-2">📝 Dein Text:</label>
+      <input type="text" id="pigpen-input" placeholder="Schreibe hier..." class="tool-input" maxlength="30" />
+    </div>
+
+    <button id="btn-pigpen" class="btn-fun bg-gradient-to-r from-candy-purple to-violet-500 mb-6">
+      🏗️ In Pigpen umwandeln
+    </button>
+
+    <div>
+      <label class="block text-lg font-bold mb-2">✨ Geheimschrift:</label>
+      <div id="pigpen-output" class="bg-white rounded-2xl p-6 min-h-[100px] flex flex-wrap gap-2 items-center justify-center">
+        <span class="text-gray-400">Hier erscheinen die Symbole...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Challenge -->
+  <div class="bg-gradient-to-r from-candy-red/20 to-candy-orange/20 rounded-3xl p-8 shadow-xl">
+    <h2 class="text-3xl font-fun font-bold text-candy-red mb-4">🏆 Herausforderung!</h2>
+    <p class="text-lg mb-4">Schreibe deinen Namen in Pigpen-Schrift auf Papier und gib ihn einem Freund zum Entschlüsseln! 📝</p>
+    <p class="text-gray-600">💡 <strong>Tipp:</strong> Drucke das Gitter oben aus und übe damit!</p>
+  </div>
+
+  <script>
+    function drawPigpen(letter: string): string {
+      const s = 48, m = 6;
+      const shapes: Record<string, {path: string, dot: boolean}> = {
+        'A': {path: `M${m} ${s-m} L${m} ${m} L${s-m} ${m}`, dot: false},
+        'B': {path: `M${m} ${m} L${s-m} ${m}`, dot: false},
+        'C': {path: `M${m} ${m} L${s-m} ${m} L${s-m} ${s-m}`, dot: false},
+        'D': {path: `M${m} ${s-m} L${m} ${m}`, dot: false},
+        'E': {path: `M${m} ${m} L${s-m} ${m} L${s-m} ${s-m} L${m} ${s-m} Z`, dot: false},
+        'F': {path: `M${s-m} ${m} L${s-m} ${s-m}`, dot: false},
+        'G': {path: `M${m} ${m} L${m} ${s-m} L${s-m} ${s-m}`, dot: false},
+        'H': {path: `M${m} ${s-m} L${s-m} ${s-m}`, dot: false},
+        'I': {path: `M${s-m} ${m} L${s-m} ${s-m} L${m} ${s-m}`, dot: false},
+        'J': {path: `M${m} ${s-m} L${m} ${m} L${s-m} ${m}`, dot: true},
+        'K': {path: `M${m} ${m} L${s-m} ${m}`, dot: true},
+        'L': {path: `M${m} ${m} L${s-m} ${m} L${s-m} ${s-m}`, dot: true},
+        'M': {path: `M${m} ${s-m} L${m} ${m}`, dot: true},
+        'N': {path: `M${m} ${m} L${s-m} ${m} L${s-m} ${s-m} L${m} ${s-m} Z`, dot: true},
+        'O': {path: `M${s-m} ${m} L${s-m} ${s-m}`, dot: true},
+        'P': {path: `M${m} ${m} L${m} ${s-m} L${s-m} ${s-m}`, dot: true},
+        'Q': {path: `M${m} ${s-m} L${s-m} ${s-m}`, dot: true},
+        'R': {path: `M${s-m} ${m} L${s-m} ${s-m} L${m} ${s-m}`, dot: true},
+        'S': {path: `M${s/2} ${m} L${s-m} ${s/2} L${s/2} ${s-m}`, dot: false},
+        'T': {path: `M${s/2} ${m} L${m} ${s/2} L${s/2} ${s-m}`, dot: false},
+        'U': {path: `M${m} ${s/2} L${s/2} ${m} L${s-m} ${s/2}`, dot: false},
+        'V': {path: `M${m} ${s/2} L${s/2} ${s-m} L${s-m} ${s/2}`, dot: false},
+        'W': {path: `M${s/2} ${m} L${s-m} ${s/2} L${s/2} ${s-m}`, dot: true},
+        'X': {path: `M${s/2} ${m} L${m} ${s/2} L${s/2} ${s-m}`, dot: true},
+        'Y': {path: `M${m} ${s/2} L${s/2} ${m} L${s-m} ${s/2}`, dot: true},
+        'Z': {path: `M${m} ${s/2} L${s/2} ${s-m} L${s-m} ${s/2}`, dot: true},
+      };
+      const shape = shapes[letter];
+      if (!shape) return '';
+      let svg = `<svg viewBox="0 0 ${s} ${s}" width="${s}" height="${s}" class="inline-block">`;
+      svg += `<path d="${shape.path}" fill="none" stroke="#C44DFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+      if (shape.dot) svg += `<circle cx="${s/2}" cy="${s/2}" r="4" fill="#FF6B9D"/>`;
+      svg += '</svg>';
+      return svg;
+    }
+
+    document.getElementById('btn-pigpen')!.addEventListener('click', () => {
+      const text = (document.getElementById('pigpen-input') as HTMLInputElement).value.toUpperCase();
+      const output = document.getElementById('pigpen-output')!;
+      if (!text) { output.innerHTML = '<span class="text-gray-400">Schreibe erst etwas! ☝️</span>'; return; }
+      output.innerHTML = text.split('').map(c => {
+        if (c === ' ') return '<span class="w-4"></span>';
+        return drawPigpen(c);
+      }).join('');
+    });
+  </script>
+</Layout>
