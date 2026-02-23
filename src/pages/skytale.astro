@@ -2,112 +2,85 @@
 import Layout from '../layouts/Layout.astro';
 ---
 <Layout title="Skytale" emoji="📜">
-  <div class="text-center mb-8">
-    <div class="text-7xl mb-4">📜</div>
-    <h1 class="text-5xl font-fun font-bold rainbow-text">Skytale</h1>
-    <p class="text-xl text-gray-600 mt-4 max-w-2xl mx-auto">
-      Die Spartaner im antiken Griechenland benutzten einen Stock und einen Lederstreifen,
-      um geheime Nachrichten zu verschlüsseln. Genial einfach! ⚔️
+  <section class="section text-center max-w-3xl mx-auto px-6 pb-12">
+    <div class="text-6xl mb-6 animate-fade-in">📜</div>
+    <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+      <span class="gradient-text">Skytale</span>
+    </h1>
+    <p class="text-lg text-gray-500 max-w-xl mx-auto">
+      Die Spartaner wickelten einen Papierstreifen um einen Stock und schrieben quer darüber. Ohne den passenden Stock — nur Buchstabensalat.
     </p>
-  </div>
+  </section>
 
-  <!-- How it works -->
-  <div class="bg-white rounded-3xl p-8 shadow-xl mb-8">
-    <h2 class="text-3xl font-fun font-bold text-candy-red mb-4">📖 So funktioniert's</h2>
-    <div class="space-y-4 text-lg">
-      <div class="flex items-start gap-4 bg-candy-red/10 rounded-2xl p-4">
-        <span class="text-3xl">1️⃣</span>
-        <p>Wickle einen <strong>Papierstreifen</strong> spiralförmig um einen Stock.</p>
+  <!-- Steps -->
+  <section class="max-w-3xl mx-auto px-6 mb-16">
+    <div class="card">
+      <h2 class="text-2xl font-bold mb-6">So funktioniert's</h2>
+      <div class="space-y-4">
+        <div class="flex items-start gap-4 bg-pastel-purple rounded-2xl p-5">
+          <span class="text-sm font-bold bg-apple-purple text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0">1</span>
+          <p class="text-gray-600">Wickle einen Papierstreifen spiralförmig um einen Stock.</p>
+        </div>
+        <div class="flex items-start gap-4 bg-pastel-indigo rounded-2xl p-5">
+          <span class="text-sm font-bold bg-apple-indigo text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0">2</span>
+          <p class="text-gray-600">Schreibe deine Nachricht quer über den Streifen.</p>
+        </div>
+        <div class="flex items-start gap-4 bg-pastel-blue rounded-2xl p-5">
+          <span class="text-sm font-bold bg-apple-blue text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0">3</span>
+          <p class="text-gray-600">Abgewickelt sieht die Nachricht aus wie Buchstabensalat.</p>
+        </div>
+        <div class="flex items-start gap-4 bg-pastel-green rounded-2xl p-5">
+          <span class="text-sm font-bold bg-apple-green text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0">4</span>
+          <p class="text-gray-600">Nur wer einen Stock gleicher Dicke hat, kann die Nachricht lesen.</p>
+        </div>
       </div>
-      <div class="flex items-start gap-4 bg-candy-orange/10 rounded-2xl p-4">
-        <span class="text-3xl">2️⃣</span>
-        <p>Schreibe deine Nachricht <strong>quer über den Streifen</strong>, ein Buchstabe pro Windung.</p>
+    </div>
+  </section>
+
+  <!-- Tool -->
+  <section class="bg-pastel-gray py-16">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">Skytale-Simulator</h2>
+      <div class="bg-white rounded-3xl p-8 shadow-soft">
+        <div class="mb-6">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Deine Nachricht</label>
+          <input type="text" id="skytale-input" placeholder="Schreibe hier..." class="tool-input" maxlength="60" />
+        </div>
+        <div class="mb-8">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+            Stockbreite: <span id="cols-display" class="text-apple-purple">4</span>
+          </label>
+          <input type="range" id="skytale-cols" min="2" max="10" value="4" />
+        </div>
+        <div class="flex gap-3 mb-8 flex-wrap">
+          <button id="btn-encrypt-sky" class="btn btn-purple">Verschlüsseln</button>
+          <button id="btn-decrypt-sky" class="btn btn-indigo">Entschlüsseln</button>
+        </div>
+        <div class="mb-6">
+          <label class="block text-sm font-semibold text-gray-400 mb-2">Auf dem Stock</label>
+          <div id="skytale-grid" class="bg-pastel-gray rounded-2xl p-4 flex flex-wrap gap-1 justify-center min-h-[60px]"></div>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-gray-400 mb-2">Ergebnis</label>
+          <div id="skytale-output" class="tool-output text-xl font-mono font-semibold text-apple-purple text-center">…</div>
+        </div>
       </div>
-      <div class="flex items-start gap-4 bg-candy-yellow/10 rounded-2xl p-4">
-        <span class="text-3xl">3️⃣</span>
-        <p>Wenn du den Streifen abwickelst, sieht die Nachricht wie <strong>Buchstabensalat</strong> aus!</p>
-      </div>
-      <div class="flex items-start gap-4 bg-candy-green/10 rounded-2xl p-4">
-        <span class="text-3xl">4️⃣</span>
-        <p>Nur wer einen <strong>Stock gleicher Dicke</strong> hat, kann die Nachricht lesen!</p>
-      </div>
     </div>
-  </div>
-
-  <!-- Visual example -->
-  <div class="bg-gradient-to-br from-candy-red/20 to-orange-200/30 rounded-3xl p-8 shadow-xl mb-8">
-    <h2 class="text-3xl font-fun font-bold text-candy-red mb-4">👀 Beispiel</h2>
-    <p class="text-lg mb-4">Nachricht: <strong>"HALLO WELT"</strong> mit Stockbreite 3:</p>
-
-    <div class="bg-white rounded-2xl p-6 mb-4">
-      <p class="font-bold mb-2">Auf dem Stock liest man:</p>
-      <div class="font-mono text-xl grid grid-cols-4 gap-1 max-w-xs mx-auto text-center">
-        <div class="bg-candy-red/20 rounded p-2 font-bold">H</div>
-        <div class="bg-candy-red/20 rounded p-2 font-bold">A</div>
-        <div class="bg-candy-red/20 rounded p-2 font-bold">L</div>
-        <div class="bg-candy-red/20 rounded p-2 font-bold">L</div>
-        <div class="bg-candy-orange/20 rounded p-2 font-bold">O</div>
-        <div class="bg-candy-orange/20 rounded p-2 font-bold">W</div>
-        <div class="bg-candy-orange/20 rounded p-2 font-bold">E</div>
-        <div class="bg-candy-orange/20 rounded p-2 font-bold">L</div>
-        <div class="bg-candy-yellow/20 rounded p-2 font-bold">T</div>
-        <div class="bg-gray-100 rounded p-2">·</div>
-        <div class="bg-gray-100 rounded p-2">·</div>
-        <div class="bg-gray-100 rounded p-2">·</div>
-      </div>
-      <p class="font-bold mt-4 mb-2">Abgewickelt (verschlüsselt):</p>
-      <p class="text-3xl font-mono text-center text-candy-red font-bold">HOTELAWL·L·E·</p>
-      <p class="text-sm text-gray-500 text-center mt-1">(Man liest Spalte für Spalte statt Zeile für Zeile)</p>
-    </div>
-  </div>
-
-  <!-- Interactive Tool -->
-  <div class="bg-gradient-to-br from-candy-red/20 to-rose-200/30 rounded-3xl p-8 shadow-xl mb-8">
-    <h2 class="text-3xl font-fun font-bold text-candy-red mb-6">🔧 Skytale-Simulator</h2>
-
-    <div class="mb-6">
-      <label class="block text-lg font-bold mb-2">📝 Deine Nachricht:</label>
-      <input type="text" id="skytale-input" placeholder="Schreibe hier..." class="tool-input" maxlength="60" />
-    </div>
-
-    <div class="mb-6">
-      <label class="block text-lg font-bold mb-2">📏 Stockbreite (Spalten): <span id="cols-display" class="text-candy-red text-2xl">4</span></label>
-      <input type="range" id="skytale-cols" min="2" max="10" value="4"
-             class="w-full h-3 rounded-full appearance-none bg-candy-red/30 cursor-pointer" />
-    </div>
-
-    <div class="flex gap-4 mb-6 flex-wrap">
-      <button id="btn-encrypt-sky" class="btn-fun bg-gradient-to-r from-candy-red to-orange-400">
-        🔒 Verschlüsseln
-      </button>
-      <button id="btn-decrypt-sky" class="btn-fun bg-gradient-to-r from-candy-purple to-candy-pink">
-        🔓 Entschlüsseln
-      </button>
-    </div>
-
-    <!-- Grid view -->
-    <div class="mb-4">
-      <label class="block text-lg font-bold mb-2">📊 Auf dem Stock:</label>
-      <div id="skytale-grid" class="flex flex-wrap gap-1 justify-center bg-white rounded-2xl p-4"></div>
-    </div>
-
-    <div>
-      <label class="block text-lg font-bold mb-2">✨ Ergebnis:</label>
-      <div id="skytale-output" class="tool-output text-2xl font-mono font-bold text-candy-red text-center">...</div>
-    </div>
-  </div>
+  </section>
 
   <!-- DIY -->
-  <div class="bg-gradient-to-r from-candy-green/20 to-candy-blue/20 rounded-3xl p-8 shadow-xl">
-    <h2 class="text-3xl font-fun font-bold text-candy-green mb-4">🛠️ Bastle deine eigene Skytale!</h2>
-    <div class="space-y-3 text-lg">
-      <p>📦 <strong>Du brauchst:</strong> Einen runden Stock (Besenstiel, dicken Stift...) und einen langen Papierstreifen</p>
-      <p>✂️ Schneide einen Papierstreifen (ca. 2cm breit, 30cm lang)</p>
-      <p>🔄 Wickle ihn eng um den Stock</p>
-      <p>✍️ Schreibe deine Nachricht quer über die Windungen</p>
-      <p>🎁 Schicke den Streifen an einen Freund — der braucht den gleichen Stock zum Lesen!</p>
+  <section class="section max-w-3xl mx-auto px-6">
+    <div class="card">
+      <h2 class="text-2xl font-bold mb-6">Bastle deine eigene Skytale</h2>
+      <div class="space-y-3 text-gray-500">
+        <p>📦 <strong class="text-gray-900">Du brauchst:</strong> Einen runden Stock und einen langen Papierstreifen</p>
+        <p>✂️ Schneide einen Streifen (ca. 2 cm breit, 30 cm lang)</p>
+        <p>🔄 Wickle ihn eng um den Stock</p>
+        <p>✍️ Schreibe deine Nachricht quer über die Windungen</p>
+        <p>🎁 Schicke den Streifen an einen Freund — nur mit dem gleichen Stock lesbar!</p>
+      </div>
     </div>
-  </div>
+  </section>
 
   <script>
     const input = document.getElementById('skytale-input') as HTMLInputElement;
@@ -118,58 +91,35 @@ import Layout from '../layouts/Layout.astro';
 
     colsSlider.addEventListener('input', () => { colsDisplay.textContent = colsSlider.value; });
 
-    function encrypt(text: string, cols: number): { grid: string[][], result: string } {
+    const pastelColors = ['bg-pastel-purple','bg-pastel-indigo','bg-pastel-blue','bg-pastel-green','bg-pastel-orange','bg-pastel-pink','bg-pastel-yellow'];
+
+    function encrypt(text: string, cols: number) {
       const clean = text.toUpperCase().replace(/[^A-ZÄÖÜß ]/g, '');
       const rows = Math.ceil(clean.length / cols);
       const padded = clean.padEnd(rows * cols, '·');
       const g: string[][] = [];
-      for (let r = 0; r < rows; r++) {
-        g.push(padded.slice(r * cols, (r + 1) * cols).split(''));
-      }
+      for (let r = 0; r < rows; r++) g.push(padded.slice(r * cols, (r+1) * cols).split(''));
       let result = '';
-      for (let c = 0; c < cols; c++) {
-        for (let r = 0; r < rows; r++) {
-          result += g[r][c];
-        }
-      }
+      for (let c = 0; c < cols; c++) for (let r = 0; r < rows; r++) result += g[r][c];
       return { grid: g, result };
     }
 
-    function decrypt(text: string, cols: number): { grid: string[][], result: string } {
+    function decrypt(text: string, cols: number) {
       const clean = text.toUpperCase();
       const rows = Math.ceil(clean.length / cols);
       const padded = clean.padEnd(rows * cols, '·');
-      // Decrypt = encrypt with rows as cols
-      const g: string[][] = [];
-      for (let r = 0; r < cols; r++) {
-        g.push([]);
-      }
+      const g: string[][] = Array.from({length: rows}, () => Array(cols).fill('·'));
       let idx = 0;
-      for (let c = 0; c < cols; c++) {
-        for (let r = 0; r < rows; r++) {
-          if (!g[r]) g[r] = [];
-        }
-      }
-      // Fill column by column
-      const g2: string[][] = Array.from({length: rows}, () => Array(cols).fill('·'));
-      idx = 0;
-      for (let c = 0; c < cols; c++) {
-        for (let r = 0; r < rows; r++) {
-          g2[r][c] = padded[idx++] || '·';
-        }
-      }
+      for (let c = 0; c < cols; c++) for (let r = 0; r < rows; r++) g[r][c] = padded[idx++] || '·';
       let result = '';
-      for (let r = 0; r < rows; r++) {
-        result += g2[r].join('');
-      }
-      return { grid: g2, result: result.replace(/·/g, '').trim() };
+      for (let r = 0; r < rows; r++) result += g[r].join('');
+      return { grid: g, result: result.replace(/·/g, '').trim() };
     }
 
     function showGrid(g: string[][], cols: number) {
-      const colors = ['bg-candy-red/20', 'bg-candy-orange/20', 'bg-candy-yellow/20', 'bg-candy-green/20', 'bg-candy-blue/20', 'bg-candy-purple/20', 'bg-candy-pink/20'];
-      grid.style.cssText = `display: grid; grid-template-columns: repeat(${cols}, 1fr); max-width: ${cols * 3}rem;`;
+      grid.style.cssText = `display:grid;grid-template-columns:repeat(${cols},1fr);max-width:${cols*3.5}rem;margin:0 auto;`;
       grid.innerHTML = g.map((row, ri) =>
-        row.map(c => `<div class="${colors[ri % colors.length]} rounded p-2 text-center font-mono font-bold text-lg">${c}</div>`).join('')
+        row.map(c => `<div class="${pastelColors[ri % pastelColors.length]} rounded-lg p-2 text-center font-mono font-semibold text-sm">${c}</div>`).join('')
       ).join('');
     }
 
@@ -179,7 +129,6 @@ import Layout from '../layouts/Layout.astro';
       showGrid(g, cols);
       output.textContent = result;
     });
-
     document.getElementById('btn-decrypt-sky')!.addEventListener('click', () => {
       const cols = parseInt(colsSlider.value);
       const { grid: g, result } = decrypt(input.value, cols);

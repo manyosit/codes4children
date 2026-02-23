@@ -2,93 +2,78 @@
 import Layout from '../layouts/Layout.astro';
 ---
 <Layout title="Morse-Code" emoji="📡">
-  <div class="text-center mb-8">
-    <div class="text-7xl mb-4">📡</div>
-    <h1 class="text-5xl font-fun font-bold rainbow-text">Morse-Code</h1>
-    <p class="text-xl text-gray-600 mt-4 max-w-2xl mx-auto">
-      Punkte und Striche — damit wurde früher über riesige Entfernungen kommuniziert!
-      Per Funk, Lichtsignal oder sogar durch Klopfen an die Wand! 🔦
+  <section class="section text-center max-w-3xl mx-auto px-6 pb-12">
+    <div class="text-6xl mb-6 animate-fade-in">📡</div>
+    <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+      <span class="gradient-text">Morse-Code</span>
+    </h1>
+    <p class="text-lg text-gray-500 max-w-xl mx-auto">
+      Punkte und Striche — damit wurde über riesige Entfernungen kommuniziert. Per Funk, Lichtsignal oder Klopfzeichen.
     </p>
-  </div>
+  </section>
 
-  <!-- Morse table -->
-  <div class="bg-white rounded-3xl p-8 shadow-xl mb-8">
-    <h2 class="text-3xl font-fun font-bold text-candy-blue mb-4">📋 Das Morse-Alphabet</h2>
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3" id="morse-table">
+  <!-- Morse Alphabet -->
+  <section class="max-w-4xl mx-auto px-6 mb-16">
+    <div class="card">
+      <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-6 text-center">Das Morse-Alphabet</h2>
+      <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-2" id="morse-table"></div>
+      <p class="text-center text-sm text-gray-400 mt-4">● = kurz (dit) &nbsp;&nbsp; ━ = lang (dah)</p>
     </div>
-    <div class="mt-4 text-center text-gray-500">
-      <p>⚫ = kurzes Signal (dit) &nbsp; ➖ = langes Signal (dah)</p>
-    </div>
-  </div>
+  </section>
 
-  <!-- Interactive Tool -->
-  <div class="bg-gradient-to-br from-candy-blue/20 to-cyan-200/30 rounded-3xl p-8 shadow-xl mb-8">
-    <h2 class="text-3xl font-fun font-bold text-candy-blue mb-6">🔧 Morse-Übersetzer</h2>
-
-    <div class="mb-6">
-      <label class="block text-lg font-bold mb-2">📝 Dein Text:</label>
-      <input type="text" id="morse-input" placeholder="Schreibe hier..."
-             class="tool-input" maxlength="50" />
-    </div>
-
-    <div class="flex gap-4 mb-6 flex-wrap">
-      <button id="btn-to-morse" class="btn-fun bg-gradient-to-r from-candy-blue to-cyan-400">
-        📡 In Morse umwandeln
-      </button>
-      <button id="btn-play-morse" class="btn-fun bg-gradient-to-r from-candy-green to-emerald-400">
-        🔊 Abspielen
-      </button>
-      <button id="btn-flash-morse" class="btn-fun bg-gradient-to-r from-candy-yellow to-amber-400 text-gray-800">
-        💡 Blinken!
-      </button>
-    </div>
-
-    <div>
-      <label class="block text-lg font-bold mb-2">✨ Morse-Code:</label>
-      <div id="morse-output" class="tool-output text-2xl font-mono text-candy-blue text-center tracking-widest">
-        ⚫ ➖ ⚫ ⚫ ...
+  <!-- Tool -->
+  <section class="bg-pastel-gray py-16">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">Morse-Übersetzer</h2>
+      <div class="bg-white rounded-3xl p-8 shadow-soft">
+        <div class="mb-6">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Dein Text</label>
+          <input type="text" id="morse-input" placeholder="Schreibe hier..." class="tool-input" maxlength="50" />
+        </div>
+        <div class="flex gap-3 mb-8 flex-wrap">
+          <button id="btn-to-morse" class="btn btn-blue">Übersetzen</button>
+          <button id="btn-play-morse" class="btn btn-green">▶ Abspielen</button>
+          <button id="btn-flash-morse" class="btn btn-orange">💡 Blinken</button>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Morse-Code</label>
+          <div id="morse-output" class="tool-output text-xl font-mono text-apple-blue text-center tracking-widest">…</div>
+        </div>
+        <div id="flash-area" class="hidden mt-6 rounded-2xl h-28 flex items-center justify-center text-3xl font-semibold transition-all duration-100"
+             style="background: #1D1D1F; color: white;">💡</div>
       </div>
     </div>
-
-    <!-- Flash display -->
-    <div id="flash-area" class="hidden mt-6 rounded-3xl h-32 flex items-center justify-center text-4xl font-bold transition-all duration-100"
-         style="background: #222; color: white;">
-      💡
-    </div>
-  </div>
+  </section>
 
   <!-- SOS -->
-  <div class="bg-gradient-to-r from-candy-red/20 to-candy-orange/20 rounded-3xl p-8 shadow-xl">
-    <h2 class="text-3xl font-fun font-bold text-candy-red mb-4">🆘 Das berühmteste Morse-Signal</h2>
-    <p class="text-lg mb-4">
-      <strong>SOS</strong> ist das internationale Notsignal. Es ist super einfach zu merken:
-    </p>
-    <div class="bg-white rounded-2xl p-6 text-center">
-      <p class="text-4xl font-mono font-bold tracking-widest">⚫⚫⚫ ➖➖➖ ⚫⚫⚫</p>
-      <p class="text-xl mt-2">drei kurz — drei lang — drei kurz</p>
+  <section class="section max-w-3xl mx-auto px-6">
+    <div class="card text-center">
+      <h2 class="text-2xl font-bold mb-3">🆘 Das berühmteste Signal</h2>
+      <p class="text-gray-500 mb-6">SOS — das internationale Notsignal. Super einfach zu merken:</p>
+      <div class="bg-pastel-blue rounded-2xl p-6 mb-4">
+        <p class="text-3xl font-mono font-bold tracking-widest text-apple-blue">● ● ●&nbsp;&nbsp;━ ━ ━&nbsp;&nbsp;● ● ●</p>
+        <p class="text-sm text-gray-500 mt-2">drei kurz — drei lang — drei kurz</p>
+      </div>
+      <p class="text-sm text-gray-400">
+        Du kannst SOS mit einer Taschenlampe signalisieren: 3× kurz blinken, 3× lang, 3× kurz.
+      </p>
     </div>
-    <p class="mt-4 text-gray-600">
-      💡 <strong>Tipp:</strong> Du kannst SOS auch mit einer Taschenlampe signalisieren:
-      3× kurz blinken, 3× lang blinken, 3× kurz blinken!
-    </p>
-  </div>
+  </section>
 
   <script>
     const MORSE: Record<string, string> = {
       'A':'.-','B':'-...','C':'-.-.','D':'-..','E':'.','F':'..-.','G':'--.','H':'....','I':'..','J':'.---',
       'K':'-.-','L':'.-..','M':'--','N':'-.','O':'---','P':'.--.','Q':'--.-','R':'.-.','S':'...','T':'-',
       'U':'..-','V':'...-','W':'.--','X':'-..-','Y':'-.--','Z':'--..','0':'-----','1':'.----','2':'..---',
-      '3':'...--','4':'....-','5':'.....','6':'-....','7':'--...','8':'---..','9':'----.','Ä':'.-.-',
-      'Ö':'---.','Ü':'..--'
+      '3':'...--','4':'....-','5':'.....','6':'-....','7':'--...','8':'---..','9':'----.'
     };
 
-    // Build table
     const table = document.getElementById('morse-table')!;
     Object.entries(MORSE).forEach(([letter, code]) => {
-      const visual = code.replace(/\./g, '⚫').replace(/-/g, '➖');
-      table.innerHTML += `<div class="bg-candy-blue/10 rounded-xl p-3 text-center">
-        <div class="text-2xl font-bold">${letter}</div>
-        <div class="text-lg tracking-wider">${visual}</div>
+      const visual = code.replace(/\./g, '●').replace(/-/g, '━');
+      table.innerHTML += `<div class="bg-pastel-blue rounded-xl p-3 text-center">
+        <div class="text-lg font-bold text-gray-800">${letter}</div>
+        <div class="text-sm tracking-wider text-apple-blue font-mono">${visual}</div>
       </div>`;
     });
 
@@ -96,7 +81,7 @@ import Layout from '../layouts/Layout.astro';
       return text.toUpperCase().split('').map(c => {
         if (c === ' ') return ' / ';
         const m = MORSE[c];
-        return m ? m.replace(/\./g, '⚫').replace(/-/g, '➖') : '';
+        return m ? m.replace(/\./g, '●').replace(/-/g, '━') : '';
       }).join(' ');
     }
 
@@ -111,63 +96,44 @@ import Layout from '../layouts/Layout.astro';
     const output = document.getElementById('morse-output')!;
 
     document.getElementById('btn-to-morse')!.addEventListener('click', () => {
-      output.textContent = textToMorse(input.value) || 'Schreibe erst etwas oben rein! ☝️';
+      output.textContent = textToMorse(input.value) || '…';
     });
 
-    // Audio playback
     document.getElementById('btn-play-morse')!.addEventListener('click', async () => {
       const raw = textToMorseRaw(input.value);
       if (!raw) return;
       const ctx = new AudioContext();
       let time = ctx.currentTime;
       const dot = 0.1, dash = 0.3, gap = 0.1, letterGap = 0.3, wordGap = 0.7;
-
       for (const char of raw) {
-        if (char === '.') {
+        if (char === '.' || char === '-') {
           const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          osc.connect(gain).connect(ctx.destination);
+          osc.connect(ctx.destination);
           osc.frequency.value = 600;
           osc.start(time);
-          osc.stop(time + dot);
-          time += dot + gap;
-        } else if (char === '-') {
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          osc.connect(gain).connect(ctx.destination);
-          osc.frequency.value = 600;
-          osc.start(time);
-          osc.stop(time + dash);
-          time += dash + gap;
-        } else if (char === '/') {
-          time += wordGap;
-        } else if (char === ' ') {
-          time += letterGap;
-        }
+          osc.stop(time + (char === '.' ? dot : dash));
+          time += (char === '.' ? dot : dash) + gap;
+        } else if (char === '/') { time += wordGap; }
+        else if (char === ' ') { time += letterGap; }
       }
     });
 
-    // Flash
     document.getElementById('btn-flash-morse')!.addEventListener('click', async () => {
       const raw = textToMorseRaw(input.value);
       if (!raw) return;
       const flash = document.getElementById('flash-area')!;
       flash.classList.remove('hidden');
       const dot = 150, dash = 450, gap = 150, letterGap = 350, wordGap = 700;
-
       for (const char of raw) {
         if (char === '.' || char === '-') {
-          flash.style.background = '#FFD93D';
-          flash.textContent = '💡✨';
+          flash.style.background = '#FFCC00';
+          flash.textContent = '✨';
           await new Promise(r => setTimeout(r, char === '.' ? dot : dash));
-          flash.style.background = '#222';
+          flash.style.background = '#1D1D1F';
           flash.textContent = '💡';
           await new Promise(r => setTimeout(r, gap));
-        } else if (char === '/') {
-          await new Promise(r => setTimeout(r, wordGap));
-        } else if (char === ' ') {
-          await new Promise(r => setTimeout(r, letterGap));
-        }
+        } else if (char === '/') { await new Promise(r => setTimeout(r, wordGap)); }
+        else if (char === ' ') { await new Promise(r => setTimeout(r, letterGap)); }
       }
     });
   </script>

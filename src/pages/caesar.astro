@@ -2,87 +2,94 @@
 import Layout from '../layouts/Layout.astro';
 ---
 <Layout title="Caesar-Chiffre" emoji="🏛️">
-  <div class="text-center mb-8">
-    <div class="text-7xl mb-4">🏛️</div>
-    <h1 class="text-5xl font-fun font-bold rainbow-text">Caesar-Chiffre</h1>
-    <p class="text-xl text-gray-600 mt-4 max-w-2xl mx-auto">
-      Julius Caesar hat seine geheimen Botschaften verschlüsselt, indem er jeden Buchstaben
-      im Alphabet um eine bestimmte Anzahl verschoben hat. Schlau, oder? 🧠
+  <!-- Hero -->
+  <section class="section text-center max-w-3xl mx-auto px-6 pb-12">
+    <div class="text-6xl mb-6 animate-fade-in">🏛️</div>
+    <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+      <span class="gradient-text-warm">Caesar-Chiffre</span>
+    </h1>
+    <p class="text-lg text-gray-500 max-w-xl mx-auto">
+      Julius Caesar verschlüsselte seine Botschaften, indem er jeden Buchstaben im Alphabet verschob. Einfach — aber genial.
     </p>
-  </div>
+  </section>
 
   <!-- How it works -->
-  <div class="bg-white rounded-3xl p-8 shadow-xl mb-8">
-    <h2 class="text-3xl font-fun font-bold text-candy-orange mb-4">📖 So funktioniert's</h2>
-    <p class="text-lg mb-4">
-      Stell dir vor, du verschiebst das ganze Alphabet um <strong>3 Stellen</strong>:
-    </p>
-    <div class="overflow-x-auto">
-      <div class="bg-gradient-to-r from-candy-orange/10 to-candy-yellow/10 rounded-2xl p-4 font-mono text-center mb-4">
-        <p class="text-lg"><strong>Normal:</strong>  A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
-        <p class="text-lg text-candy-orange font-bold"><strong>Geheim:</strong> D E F G H I J K L M N O P Q R S T U V W X Y Z A B C</p>
+  <section class="max-w-3xl mx-auto px-6 mb-16">
+    <div class="card">
+      <h2 class="text-2xl font-bold mb-4">So funktioniert's</h2>
+      <p class="text-gray-500 mb-6">Verschiebe das Alphabet um eine bestimmte Anzahl Stellen:</p>
+      <div class="bg-pastel-gray rounded-2xl p-5 font-mono text-sm md:text-base overflow-x-auto mb-6">
+        <p><span class="text-gray-400 mr-2">Normal:</span>  A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
+        <p class="text-apple-orange font-semibold"><span class="text-gray-400 mr-2 font-normal">+3:</span>     D E F G H I J K L M N O P Q R S T U V W X Y Z A B C</p>
+      </div>
+      <div class="bg-pastel-orange rounded-2xl p-6 text-center">
+        <p class="text-lg">
+          <span class="text-gray-500">HALLO</span>
+          <span class="mx-3 text-gray-300">→</span>
+          <span class="text-apple-orange font-bold text-2xl">KDOOR</span>
+        </p>
       </div>
     </div>
-    <div class="bg-candy-yellow/20 rounded-2xl p-6 text-center">
-      <p class="text-xl">Aus <strong class="text-3xl">HALLO</strong> wird <strong class="text-3xl text-candy-orange">KDOOR</strong>! 🤯</p>
-    </div>
-  </div>
+  </section>
 
   <!-- Interactive Tool -->
-  <div class="bg-gradient-to-br from-candy-orange/20 to-candy-yellow/20 rounded-3xl p-8 shadow-xl mb-8">
-    <h2 class="text-3xl font-fun font-bold text-candy-orange mb-6">🔧 Probier's selbst aus!</h2>
+  <section class="bg-pastel-gray py-16">
+    <div class="max-w-3xl mx-auto px-6">
+      <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">Probier's aus</h2>
 
-    <div class="mb-6">
-      <label class="block text-lg font-bold mb-2">📝 Deine Nachricht:</label>
-      <input type="text" id="caesar-input" placeholder="Schreibe hier deine geheime Nachricht..."
-             class="tool-input" maxlength="100" />
-    </div>
+      <div class="bg-white rounded-3xl p-8 shadow-soft">
+        <div class="mb-6">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Deine Nachricht</label>
+          <input type="text" id="caesar-input" placeholder="Schreibe hier deine geheime Nachricht..."
+                 class="tool-input" maxlength="100" />
+        </div>
 
-    <div class="mb-6">
-      <label class="block text-lg font-bold mb-2">🔄 Verschiebung: <span id="shift-display" class="text-candy-orange text-2xl">3</span></label>
-      <input type="range" id="caesar-shift" min="1" max="25" value="3"
-             class="w-full h-3 rounded-full appearance-none bg-candy-orange/30 cursor-pointer" />
-      <div class="flex justify-between text-sm text-gray-400 mt-1">
-        <span>1</span><span>13</span><span>25</span>
+        <div class="mb-8">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+            Verschiebung: <span id="shift-display" class="text-apple-orange">3</span>
+          </label>
+          <input type="range" id="caesar-shift" min="1" max="25" value="3" />
+        </div>
+
+        <div class="flex gap-3 mb-8 flex-wrap">
+          <button id="btn-encrypt" class="btn btn-orange">
+            Verschlüsseln
+          </button>
+          <button id="btn-decrypt" class="btn btn-indigo">
+            Entschlüsseln
+          </button>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Ergebnis</label>
+          <div id="caesar-output" class="tool-output text-xl font-semibold text-apple-orange text-center">
+            …
+          </div>
+        </div>
+      </div>
+
+      <!-- Alphabet display -->
+      <div class="mt-8 bg-white rounded-3xl p-6 shadow-soft">
+        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4 text-center">Alphabet-Zuordnung</h3>
+        <div id="alphabet-display" class="grid grid-cols-13 gap-1 max-w-2xl mx-auto"></div>
       </div>
     </div>
-
-    <div class="flex gap-4 mb-6 flex-wrap">
-      <button id="btn-encrypt" class="btn-fun bg-gradient-to-r from-candy-orange to-candy-yellow">
-        🔒 Verschlüsseln
-      </button>
-      <button id="btn-decrypt" class="btn-fun bg-gradient-to-r from-candy-purple to-candy-pink">
-        🔓 Entschlüsseln
-      </button>
-    </div>
-
-    <div>
-      <label class="block text-lg font-bold mb-2">✨ Ergebnis:</label>
-      <div id="caesar-output" class="tool-output text-2xl font-bold text-candy-orange text-center">
-        Hier erscheint dein Geheimtext...
-      </div>
-    </div>
-  </div>
-
-  <!-- Alphabet wheel SVG -->
-  <div class="bg-white rounded-3xl p-8 shadow-xl mb-8 text-center">
-    <h2 class="text-3xl font-fun font-bold text-candy-orange mb-4">🎡 Das Verschiebe-Alphabet</h2>
-    <div id="alphabet-display" class="grid grid-cols-13 gap-1 max-w-xl mx-auto">
-    </div>
-  </div>
+  </section>
 
   <!-- Challenge -->
-  <div class="bg-gradient-to-r from-candy-red/20 to-candy-orange/20 rounded-3xl p-8 shadow-xl">
-    <h2 class="text-3xl font-fun font-bold text-candy-red mb-4">🏆 Herausforderung!</h2>
-    <p class="text-lg mb-4">Kannst du diese Nachricht entschlüsseln? Die Verschiebung ist <strong>7</strong>:</p>
-    <p class="text-3xl font-mono text-center bg-white rounded-2xl p-6 font-bold text-candy-purple">
-      NLKPTLU JLOLPT
-    </p>
-    <details class="mt-4">
-      <summary class="cursor-pointer text-candy-orange font-bold text-lg hover:underline">💡 Lösung anzeigen</summary>
-      <p class="mt-2 text-xl text-center font-bold">GEHEIME CODES → Verschiebung 7 zurück!</p>
-    </details>
-  </div>
+  <section class="section max-w-3xl mx-auto px-6">
+    <div class="card text-center">
+      <h2 class="text-2xl font-bold mb-4">🏆 Herausforderung</h2>
+      <p class="text-gray-500 mb-6">Entschlüssle diese Nachricht — Verschiebung ist <strong class="text-gray-900">7</strong>:</p>
+      <p class="text-2xl md:text-3xl font-mono font-bold text-apple-indigo bg-pastel-indigo rounded-2xl p-6">
+        NLKPTLU JLOLPT
+      </p>
+      <details class="mt-6">
+        <summary class="cursor-pointer text-apple-blue font-semibold hover:underline text-sm">Lösung anzeigen</summary>
+        <p class="mt-3 text-lg font-semibold">GEHEIME CODES 🎉</p>
+      </details>
+    </div>
+  </section>
 
   <script>
     const ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -104,10 +111,10 @@ import Layout from '../layouts/Layout.astro';
       const n = parseInt(shift.value);
       alphaDisplay.innerHTML = ALPHA.split('').map((c, i) => {
         const shifted = ALPHA[(i + n) % 26];
-        return `<div class="text-center">
-          <div class="text-lg font-bold">${c}</div>
-          <div class="text-xs text-gray-400">↓</div>
-          <div class="text-lg font-bold text-candy-orange">${shifted}</div>
+        return `<div class="text-center py-1">
+          <div class="text-xs font-semibold text-gray-400">${c}</div>
+          <div class="text-xs text-gray-300">↓</div>
+          <div class="text-xs font-bold text-apple-orange">${shifted}</div>
         </div>`;
       }).join('');
     }
@@ -118,11 +125,10 @@ import Layout from '../layouts/Layout.astro';
     });
 
     document.getElementById('btn-encrypt')!.addEventListener('click', () => {
-      output.textContent = caesarShift(input.value, parseInt(shift.value)) || 'Schreibe erst etwas oben rein! ☝️';
+      output.textContent = caesarShift(input.value, parseInt(shift.value)) || '…';
     });
-
     document.getElementById('btn-decrypt')!.addEventListener('click', () => {
-      output.textContent = caesarShift(input.value, parseInt(shift.value), true) || 'Schreibe erst etwas oben rein! ☝️';
+      output.textContent = caesarShift(input.value, parseInt(shift.value), true) || '…';
     });
 
     updateAlpha();

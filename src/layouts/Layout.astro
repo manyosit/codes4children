@@ -3,17 +3,18 @@ interface Props {
   title: string;
   description?: string;
   emoji?: string;
+  color?: string;
 }
-const { title, description = "Lerne Geheimcodes und Chiffren — für Kinder von 8 bis 12!", emoji = "🔐" } = Astro.props;
+const { title, description = "Lerne Geheimcodes und Chiffren — für Kinder von 8 bis 12!", emoji = "🔐", color = "blue" } = Astro.props;
 const pages = [
-  { href: "/", label: "🏠 Start", color: "bg-candy-yellow" },
-  { href: "/caesar", label: "🏛️ Caesar", color: "bg-candy-orange" },
-  { href: "/morse", label: "📡 Morse", color: "bg-candy-blue" },
-  { href: "/zahlen", label: "🔢 Zahlen", color: "bg-candy-green" },
-  { href: "/spiegel", label: "🪞 Spiegel", color: "bg-candy-pink" },
-  { href: "/pigpen", label: "🏗️ Pigpen", color: "bg-candy-purple" },
-  { href: "/skytale", label: "📜 Skytale", color: "bg-candy-red" },
-  { href: "/emoji", label: "😎 Emoji", color: "bg-candy-yellow" },
+  { href: "/", label: "Start", emoji: "🏠" },
+  { href: "/caesar", label: "Caesar", emoji: "🏛️" },
+  { href: "/morse", label: "Morse", emoji: "📡" },
+  { href: "/zahlen", label: "Zahlen", emoji: "🔢" },
+  { href: "/spiegel", label: "Spiegel", emoji: "🪞" },
+  { href: "/pigpen", label: "Pigpen", emoji: "🏗️" },
+  { href: "/skytale", label: "Skytale", emoji: "📜" },
+  { href: "/emoji", label: "Emoji", emoji: "😎" },
 ];
 const currentPath = Astro.url.pathname;
 ---
@@ -21,53 +22,69 @@ const currentPath = Astro.url.pathname;
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="description" content={description} />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <title>{emoji} {title} — Codes4Children</title>
+  <title>{title} — Codes4Children</title>
 </head>
-<body class="min-h-screen">
+<body class="min-h-screen flex flex-col">
   <!-- Navigation -->
-  <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-lg border-b-4 border-candy-purple">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="flex items-center justify-between h-16">
-        <a href="/" class="text-2xl font-fun font-bold rainbow-text hover:animate-wiggle">
+  <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/60">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="flex items-center justify-between h-14">
+        <a href="/" class="text-lg font-bold text-gray-900 hover:text-apple-blue transition-colors">
           🔐 Codes4Children
         </a>
-        <button id="menu-toggle" class="md:hidden text-3xl" aria-label="Menü">☰</button>
+        <button id="menu-toggle" class="md:hidden w-10 h-10 flex items-center justify-center rounded-xl hover:bg-gray-100 transition-colors" aria-label="Menü">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
       </div>
-      <div id="mobile-menu" class="hidden md:flex flex-wrap gap-2 pb-3 justify-center">
-        {pages.map(p => (
-          <a href={p.href}
-             class:list={[
-               "px-3 py-1.5 rounded-full text-sm font-bold transition-all hover:scale-110",
-               currentPath === p.href ? `${p.color} text-white shadow-lg scale-105` : "bg-gray-100 hover:bg-gray-200 text-gray-700"
-             ]}>
-            {p.label}
-          </a>
-        ))}
+    </div>
+    <!-- Nav items -->
+    <div id="nav-menu" class="hidden md:block border-t border-gray-100 md:border-0">
+      <div class="max-w-5xl mx-auto px-6 py-3 md:py-0 md:-mt-1">
+        <div class="flex flex-col md:flex-row md:items-center gap-1 md:gap-0 md:justify-center">
+          {pages.map(p => (
+            <a href={p.href}
+               class:list={[
+                 "px-4 py-2.5 md:py-1.5 rounded-xl text-sm font-medium transition-all",
+                 currentPath === p.href
+                   ? "bg-apple-blue/10 text-apple-blue"
+                   : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+               ]}>
+              <span class="mr-1.5">{p.emoji}</span>{p.label}
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   </nav>
 
-  <main class="max-w-5xl mx-auto px-4 py-8">
+  <main class="flex-1">
     <slot />
   </main>
 
   <!-- Footer -->
-  <footer class="text-center py-8 mt-16 bg-gradient-to-r from-candy-purple/10 via-candy-pink/10 to-candy-blue/10 border-t-4 border-dashed border-candy-purple/20">
-    <p class="text-lg font-fun">🔐 Codes4Children — Geheimcodes für schlaue Köpfe! 🧠</p>
-    <p class="text-sm text-gray-600 mt-2">Ein Projekt der <a href="https://manyos.it" target="_blank" class="font-bold text-candy-purple hover:underline">manyos technology GmbH</a></p>
-    <p class="text-sm text-gray-500 mt-2">
-      <a href="https://manyos.it/impressum" target="_blank" class="hover:text-candy-purple hover:underline">Impressum</a>
-      <span class="mx-2">·</span>
-      <a href="https://manyos.it/datenschutz" target="_blank" class="hover:text-candy-purple hover:underline">Datenschutz</a>
-    </p>
+  <footer class="border-t border-gray-100 mt-24">
+    <div class="max-w-5xl mx-auto px-6 py-10 text-center">
+      <p class="text-sm font-medium text-gray-500">
+        Ein Projekt der <a href="https://manyos.it" target="_blank" class="text-gray-700 hover:text-apple-blue transition-colors">manyos technology GmbH</a>
+      </p>
+      <div class="flex items-center justify-center gap-4 mt-3 text-xs text-gray-400">
+        <a href="https://manyos.it/impressum" target="_blank" class="hover:text-gray-600 transition-colors">Impressum</a>
+        <span>·</span>
+        <a href="https://manyos.it/datenschutz" target="_blank" class="hover:text-gray-600 transition-colors">Datenschutz</a>
+      </div>
+    </div>
   </footer>
 
   <script>
     const toggle = document.getElementById('menu-toggle');
-    const menu = document.getElementById('mobile-menu');
+    const menu = document.getElementById('nav-menu');
     toggle?.addEventListener('click', () => {
       menu?.classList.toggle('hidden');
     });
