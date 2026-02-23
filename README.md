@@ -1,43 +1,95 @@
-# Astro Starter Kit: Minimal
+# 🔐 Codes4Children
 
-```sh
-npm create astro@latest -- --template minimal
+**Geheimcodes & Chiffren — interaktiv erklärt für Kinder von 8 bis 12 Jahren!**
+
+Eine bunte, spielerische Website, auf der Kinder die faszinierende Welt der Verschlüsselung entdecken können. Mit interaktiven Tools zum Ausprobieren, spannenden Geschichten und kniffligen Rätseln.
+
+🌐 **Live:** [codes4children.pages.dev](https://codes4children.pages.dev)
+
+---
+
+## 🕵️ Was steckt drin?
+
+| Seite | Was man lernt |
+|-------|--------------|
+| 🏛️ **Caesar-Chiffre** | Verschiebe das Alphabet wie ein römischer Kaiser — mit interaktivem Slider |
+| 📡 **Morse-Code** | Punkte & Striche übersetzen, anhören und als Lichtsignal blinken lassen |
+| 🔢 **Zahlen-Code** | A=1, B=2 … verschlüssle Nachrichten mit Zahlen |
+| 🪞 **Spiegelschrift** | Schreibe rückwärts wie Leonardo da Vinci — mit Live-Spiegel |
+| 🏗️ **Freimaurer-Chiffre** | Geheime Symbole statt Buchstaben (Pigpen) — mit SVG-Darstellung |
+| 📜 **Skytale** | Die antike Verschlüsselung der Spartaner — mit Grid-Visualisierung |
+| 😎 **Emoji-Code** | Erstelle deine eigene Geheimsprache mit 5 verschiedenen Emoji-Sets |
+
+Alle Codes haben **interaktive Tools** zum Verschlüsseln und Entschlüsseln — direkt im Browser, ohne Installation!
+
+---
+
+## 🚀 Lokal starten
+
+```bash
+# Repository klonen
+git clone https://github.com/manyosit/codes4children.git
+cd codes4children
+
+# Abhängigkeiten installieren
+npm install
+
+# Entwicklungsserver starten
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Die Seite läuft dann unter `http://localhost:4321` 🎉
 
-## 🚀 Project Structure
+### Weitere Befehle
 
-Inside of your Astro project, you'll see the following folders and files:
+| Befehl | Beschreibung |
+|--------|-------------|
+| `npm run dev` | Entwicklungsserver mit Hot Reload |
+| `npm run build` | Produktions-Build nach `./dist/` |
+| `npm run preview` | Build lokal vorab ansehen |
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+---
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🛠️ Tech-Stack
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- **[Astro](https://astro.build/)** — Statischer Site Generator
+- **[Tailwind CSS](https://tailwindcss.com/)** — Utility-first CSS
+- **Vanilla JavaScript** — Interaktive Verschlüsselungs-Tools (kein Framework-Overhead)
+- **SVG** — Illustrationen für die Freimaurer-Chiffre
+- **Web Audio API** — Morse-Code Abspielen
+- **Cloudflare Pages** — Hosting
 
-Any static assets, like images, can be placed in the `public/` directory.
+---
 
-## 🧞 Commands
+## 🤝 Mitmachen
 
-All commands are run from the root of the project, from a terminal:
+Beiträge sind willkommen! Ob neue Codes, bessere Erklärungen, Übersetzungen oder Bugfixes — wir freuen uns über jede Hilfe.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+1. Fork erstellen
+2. Feature-Branch anlegen (`git checkout -b mein-feature`)
+3. Änderungen committen (`git commit -m 'Neuen Code hinzugefügt'`)
+4. Branch pushen (`git push origin mein-feature`)
+5. Pull Request öffnen
 
-## 👀 Want to learn more?
+### 💡 Ideen für Beiträge
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Weitere Chiffren (Vigenère, Polybius, Braille, …)
+- Übersetzungen (Englisch, Französisch, …)
+- Accessibility-Verbesserungen
+- Druckbare Arbeitsblätter
+- Quiz-Modus
+
+---
+
+## 📄 Lizenz
+
+Dieses Projekt steht unter der **MIT-Lizenz** — siehe [LICENSE](LICENSE) für Details.
+
+Kurz gesagt: Ihr dürft den Code frei verwenden, kopieren, verändern und weitergeben. Auch für den Schulunterricht! 🏫
+
+---
+
+<p align="center">
+  Mit 💜 gemacht für neugierige Kinder<br>
+  <strong>Codes4Children</strong> — Geheimcodes für schlaue Köpfe! 🧠
+</p>
