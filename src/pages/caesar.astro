@@ -14,8 +14,18 @@ const funFacts = [
       <h2 class="font-display font-bold text-2xl mb-4">So funktioniert's</h2>
       <p class="text-text-secondary mb-6">Verschiebe das Alphabet um eine bestimmte Anzahl Stellen:</p>
       <div class="bg-gray-50 rounded-xl p-5 font-mono text-sm md:text-base overflow-x-auto mb-6">
-        <p><span class="text-text-secondary mr-2">Normal:</span>  A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
-        <p class="font-semibold" style={`color: ${code.accentColor}`}><span class="text-text-secondary mr-2 font-normal">+3:</span>     D E F G H I J K L M N O P Q R S T U V W X Y Z A B C</p>
+        <div class="flex gap-0">
+          <div class="flex flex-col items-end mr-2 shrink-0">
+            <span class="text-text-secondary text-xs leading-6">Normal:</span>
+            <span class="text-text-secondary text-xs leading-6 font-normal">+3:</span>
+          </div>
+          {['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'].map((letter, i) => (
+            <div class="flex flex-col items-center min-w-[1.4rem]">
+              <span class="leading-6">{letter}</span>
+              <span class="leading-6 font-semibold" style={`color: ${code.accentColor}`}>{'DEFGHIJKLMNOPQRSTUVWXYZABC'[i]}</span>
+            </div>
+          ))}
+        </div>
       </div>
       <div class="rounded-xl p-6 text-center" style={`background: ${code.accentColorLight}`}>
         <p class="text-lg">
