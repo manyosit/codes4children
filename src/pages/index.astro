@@ -35,8 +35,8 @@ import { codes } from '../data/codes';
       {codes.map(code => (
         <a href={`/${code.slug}`} class="group block bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-lifted transition-all duration-300 hover:-translate-y-2"
            style={`border-top: 4px solid ${code.accentColor}`}>
-          <div class="h-40 flex items-center justify-center" style={`background: ${code.accentColorLight}`}>
-            <img src={`/icons/${code.slug}.png`} alt={code.title} class="h-28 w-28 object-contain group-hover:scale-110 transition-transform duration-300" />
+          <div class="h-48 flex items-center justify-center" style={`background: ${code.accentColorLight}`}>
+            <img src={`/icons/${code.slug}.png`} alt={code.title} class="h-36 w-36 object-contain group-hover:scale-110 transition-transform duration-300" />
           </div>
           <div class="p-6">
             <div class="flex items-center justify-between mb-2">

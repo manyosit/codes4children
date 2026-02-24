@@ -23,7 +23,7 @@ const { code, funFacts = [] } = Astro.props;
       <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16">
         <div class="flex-1 text-center md:text-left">
           <div class="flex items-center gap-3 mb-4 justify-center md:justify-start">
-            <span class="text-5xl">{code.icon}</span>
+            <img src={`/icons/${code.slug}.png`} alt={code.title} class="w-12 h-12 object-contain" />
             <div class="flex gap-1">
               {Array.from({length: 3}, (_, i) => (
                 <svg class="w-5 h-5" viewBox="0 0 20 20" fill={i < code.difficulty ? code.accentColor : '#E2E8F0'}>
@@ -39,9 +39,9 @@ const { code, funFacts = [] } = Astro.props;
             {code.description}
           </p>
         </div>
-        <!-- Placeholder illustration -->
-        <div class="w-48 h-48 md:w-64 md:h-64 rounded-3xl flex items-center justify-center text-8xl md:text-9xl animate-float" style={`background: ${code.accentColor}15`}>
-          {code.icon}
+        <!-- Illustration -->
+        <div class="w-48 h-48 md:w-64 md:h-64 rounded-3xl flex items-center justify-center animate-float" style={`background: ${code.accentColor}15`}>
+          <img src={`/icons/${code.slug}.png`} alt={code.title} class="w-40 h-40 md:w-56 md:h-56 object-contain" />
         </div>
       </div>
     </div>
