@@ -1,10 +1,10 @@
-# 🔐 Codes4Children
+# 🔐 Codes4Kids
 
 **Geheimcodes & Chiffren — interaktiv erklärt für Kinder von 8 bis 12 Jahren!**
 
 Eine bunte, spielerische Website, auf der Kinder die faszinierende Welt der Verschlüsselung entdecken können. Mit interaktiven Tools zum Ausprobieren, spannenden Geschichten und kniffligen Rätseln.
 
-🌐 **Live:** [codes4children.pages.dev](https://codes4children.pages.dev)
+🌐 **Live:** [codes4kids.de](https://codes4kids.de)
 
 ---
 
@@ -28,8 +28,8 @@ Alle Codes haben **interaktive Tools** zum Verschlüsseln und Entschlüsseln —
 
 ```bash
 # Repository klonen
-git clone https://github.com/manyosit/codes4children.git
-cd codes4children
+git clone https://github.com/manyosit/codes4kids.git
+cd codes4kids
 
 # Abhängigkeiten installieren
 npm install
@@ -91,5 +91,5 @@ Kurz gesagt: Ihr dürft den Code frei verwenden, kopieren, verändern und weiter
 
 <p align="center">
   Mit 💜 gemacht für neugierige Kinder<br>
-  <strong>Codes4Children</strong> — Geheimcodes für schlaue Köpfe! 🧠
+  <strong>Codes4Kids</strong> — Geheimcodes für schlaue Köpfe! 🧠
 </p>
