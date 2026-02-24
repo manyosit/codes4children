@@ -1,0 +1,266 @@
+---
+import CodeLayout from '../layouts/CodeLayout.astro';
+import { getCodeBySlug } from '../data/codes';
+const code = getCodeBySlug('komprimierung')!;
+const funFacts = [
+  { icon: '📦', text: '<strong class="text-white">ZIP-Dateien</strong> sparen jeden Tag Milliarden Gigabyte an Speicherplatz auf der ganzen Welt.' },
+  { icon: '📺', text: 'Ohne Komprimierung wäre <strong class="text-white">YouTube und Netflix</strong> unmöglich — jedes Video wäre riesig!' },
+  { icon: '📱', text: 'Dein <strong class="text-white">Handy</strong> komprimiert ständig Daten, ohne dass du es merkst — bei Fotos, Nachrichten und Apps.' },
+];
+---
+<CodeLayout code={code} funFacts={funFacts}>
+  <!-- How it works -->
+  <section class="max-w-content mx-auto px-6 md:px-12 py-16">
+    <div class="card-static max-w-3xl mx-auto">
+      <h2 class="font-display font-bold text-2xl mb-4">So funktioniert's</h2>
+      <p class="text-text-secondary mb-6">
+        Stell dir vor, du schreibst einen langen Text und merkst: Manche Wörter und Buchstabengruppen kommen immer wieder vor. 
+        Statt sie jedes Mal neu zu schreiben, könntest du <strong>Abkürzungen</strong> erfinden!
+      </p>
+      <p class="text-text-secondary mb-6">
+        Genau das macht ein Computer bei der <strong>Wörterbuch-Komprimierung</strong>:
+      </p>
+      <ol class="space-y-3 mb-6 text-text-secondary">
+        <li class="flex gap-3"><span class="font-bold text-lg" style={`color: ${code.accentColor}`}>1.</span> Er liest den Text Zeichen für Zeichen durch</li>
+        <li class="flex gap-3"><span class="font-bold text-lg" style={`color: ${code.accentColor}`}>2.</span> Wenn er ein Muster erkennt, das schon vorkam, merkt er es sich in einem <strong>Wörterbuch</strong></li>
+        <li class="flex gap-3"><span class="font-bold text-lg" style={`color: ${code.accentColor}`}>3.</span> Beim nächsten Mal ersetzt er das Muster durch eine <strong>kurze Nummer</strong> — wie eine Abkürzung!</li>
+      </ol>
+
+      <div class="rounded-xl p-6 text-center" style={`background: ${code.accentColorLight}`}>
+        <p class="text-sm text-text-secondary mb-2">Beispiel:</p>
+        <p class="text-lg mb-1">
+          <span class="font-mono font-bold text-text-primary">ABRACADABRA</span>
+        </p>
+        <p class="text-sm text-text-secondary mb-2">↓ wird zu ↓</p>
+        <p class="text-lg">
+          <span class="font-mono font-bold" style={`color: ${code.accentColor}`}>ABRACAD<span class="bg-sky-200 rounded px-1">[1]</span><span class="bg-sky-200 rounded px-1">[4]</span></span>
+        </p>
+        <p class="text-xs text-text-secondary mt-2">Wörterbuch: [1]=ABR, [4]=A → die Wiederholungen wurden durch kurze Codes ersetzt!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Geschichte -->
+  <section class="bg-surface-dark py-16 md:py-20">
+    <div class="max-w-content mx-auto px-6 md:px-12">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="font-display font-bold text-2xl md:text-3xl text-white text-center mb-8">📖 Die Geschichte dahinter</h2>
+        <div class="bg-white/5 backdrop-blur rounded-2xl p-8 border border-white/10">
+          <p class="text-gray-300 leading-relaxed mb-4">
+            In den 1970er Jahren hatten Computer ein riesiges Problem: Speicherplatz war unglaublich teuer und knapp. Eine einzige Festplatte kostete so viel wie ein Auto — und konnte nur winzige Mengen an Daten speichern!
+          </p>
+          <p class="text-gray-300 leading-relaxed mb-4">
+            Zwei clevere Wissenschaftler aus Israel, <strong class="text-white">Abraham Lempel</strong> und <strong class="text-white">Jacob Ziv</strong>, hatten eine geniale Idee: Was wäre, wenn man Daten <em>schrumpfen</em> könnte? Sie erfanden 1977 einen Algorithmus, der Muster in Daten findet und durch kurze Codes ersetzt — wie ein magisches Schrumpf-Rezept! 🧪
+          </p>
+          <p class="text-gray-300 leading-relaxed mb-4">
+            Ein paar Jahre später kam der Amerikaner <strong class="text-white">Terry Welch</strong> dazu und verbesserte die Methode. Die drei zusammen nannte man <strong class="text-white">LZW</strong> (Lempel-Ziv-Welch) — und ihr Trick wurde weltberühmt!
+          </p>
+          <p class="text-gray-300 leading-relaxed">
+            Heute steckt ihre Erfindung in jeder ZIP-Datei, in jedem GIF-Bild, und in tausend anderen Dingen, die du täglich benutzt. Ohne diese drei Erfinder wäre das Internet, wie wir es kennen, unmöglich! 🌍✨
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Tool -->
+  <section class="py-16" style={`background: ${code.accentColor}08`}>
+    <div class="max-w-3xl mx-auto px-6 md:px-12">
+      <h2 class="font-display font-bold text-2xl md:text-3xl text-center mb-10">Probier's aus</h2>
+
+      <div class="card-static p-8">
+        <div class="mb-6">
+          <label class="block text-sm font-semibold text-text-primary mb-2">Dein Text</label>
+          <textarea id="compress-input" placeholder="Schreibe hier einen Text… (probier mal ABRACADABRA oder ANANASBANANE)"
+                 class="tool-input w-full h-24 resize-none" style={`--tw-ring-color: ${code.accentColor}30; border-color: #E2E8F0`}
+                 maxlength="200">ABRACADABRA</textarea>
+        </div>
+
+        <!-- Segmented Control -->
+        <div class="segmented-control mb-8">
+          <button id="btn-compress" class="active">🗜️ Komprimieren</button>
+          <button id="btn-decompress">📖 Dekomprimieren</button>
+        </div>
+
+        <!-- Results -->
+        <div id="result-area" class="space-y-4">
+          <!-- Dictionary -->
+          <div>
+            <label class="block text-sm font-semibold text-text-primary mb-2">📚 Wörterbuch</label>
+            <div id="dictionary-display" class="tool-output text-sm font-mono overflow-x-auto"
+                 style={`background: ${code.accentColor}10; border-left: 4px solid ${code.accentColor}`}>
+              …
+            </div>
+          </div>
+
+          <!-- Compressed output -->
+          <div>
+            <label class="block text-sm font-semibold text-text-primary mb-2">📦 Komprimiertes Ergebnis</label>
+            <div id="compressed-display" class="tool-output text-lg font-semibold text-center"
+                 style={`background: ${code.accentColor}10; border-left: 4px solid ${code.accentColor}; color: ${code.accentColor}`}>
+              …
+            </div>
+          </div>
+
+          <!-- Savings -->
+          <div id="savings-display" class="rounded-xl p-4 text-center font-bold text-lg hidden"
+               style={`background: ${code.accentColorLight}; color: ${code.accentColor}`}>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script define:vars={{ accentColor: code.accentColor }}>
+    // Simple LZW-like compression
+    function lzwCompress(input) {
+      if (!input) return { codes: [], dictionary: {}, original: 0, compressed: 0 };
+      
+      // Initialize dictionary with single characters
+      const dict = {};
+      let dictSize = 256;
+      for (let i = 0; i < 256; i++) {
+        dict[String.fromCharCode(i)] = i;
+      }
+
+      const newEntries = {}; // only entries added beyond initial 256
+      let w = '';
+      const result = [];
+
+      for (let i = 0; i < input.length; i++) {
+        const c = input[i];
+        const wc = w + c;
+        if (dict[wc] !== undefined) {
+          w = wc;
+        } else {
+          result.push(dict[w]);
+          newEntries[dictSize] = wc;
+          dict[wc] = dictSize++;
+          w = c;
+        }
+      }
+      if (w) result.push(dict[w]);
+
+      return {
+        codes: result,
+        dictionary: newEntries,
+        original: input.length,
+        compressed: result.length,
+      };
+    }
+
+    function lzwDecompress(codes) {
+      if (!codes.length) return '';
+      
+      const dict = {};
+      let dictSize = 256;
+      for (let i = 0; i < 256; i++) {
+        dict[i] = String.fromCharCode(i);
+      }
+
+      let w = dict[codes[0]];
+      let result = w;
+
+      for (let i = 1; i < codes.length; i++) {
+        const k = codes[i];
+        let entry;
+        if (dict[k] !== undefined) {
+          entry = dict[k];
+        } else if (k === dictSize) {
+          entry = w + w[0];
+        } else {
+          throw new Error('Bad compressed code: ' + k);
+        }
+        result += entry;
+        dict[dictSize++] = w + entry[0];
+        w = entry;
+      }
+      return result;
+    }
+
+    const input = document.getElementById('compress-input');
+    const dictDisplay = document.getElementById('dictionary-display');
+    const compDisplay = document.getElementById('compressed-display');
+    const savingsDisplay = document.getElementById('savings-display');
+    const btnCompress = document.getElementById('btn-compress');
+    const btnDecompress = document.getElementById('btn-decompress');
+    let mode = 'compress';
+    let lastCodes = [];
+
+    function doCompress() {
+      const text = input.value;
+      if (!text) {
+        dictDisplay.textContent = '…';
+        compDisplay.textContent = '…';
+        savingsDisplay.classList.add('hidden');
+        return;
+      }
+      const res = lzwCompress(text);
+      lastCodes = res.codes;
+
+      // Show dictionary (only new entries beyond ASCII)
+      const entries = Object.entries(res.dictionary);
+      if (entries.length > 0) {
+        dictDisplay.innerHTML = entries.slice(0, 20).map(([code, str]) =>
+          `<span class="inline-block bg-white rounded px-2 py-1 m-0.5 border border-gray-200"><strong style="color:${accentColor}">[${code}]</strong> = "${str}"</span>`
+        ).join(' ') + (entries.length > 20 ? ` <span class="text-text-secondary">… und ${entries.length - 20} weitere</span>` : '');
+      } else {
+        dictDisplay.textContent = 'Keine neuen Muster gefunden (Text ist zu kurz)';
+      }
+
+      // Show compressed codes
+      compDisplay.innerHTML = res.codes.map(c => {
+        if (c >= 256) {
+          return `<span class="bg-sky-200 rounded px-1 font-bold">[${c}]</span>`;
+        }
+        return `<span>${String.fromCharCode(c)}</span>`;
+      }).join('');
+
+      // Savings
+      const originalBits = res.original;
+      const compressedBits = res.compressed;
+      const savings = Math.max(0, Math.round((1 - compressedBits / originalBits) * 100));
+      savingsDisplay.classList.remove('hidden');
+      if (savings > 0) {
+        savingsDisplay.textContent = `🎉 Du hast ${savings}% Platz gespart! (${originalBits} → ${compressedBits} Zeichen)`;
+      } else {
+        savingsDisplay.textContent = `🤔 Kein Platz gespart — der Text ist zu kurz oder hat kaum Wiederholungen.`;
+      }
+    }
+
+    function doDecompress() {
+      if (!lastCodes.length) {
+        compDisplay.textContent = 'Komprimiere zuerst einen Text!';
+        return;
+      }
+      try {
+        const result = lzwDecompress(lastCodes);
+        compDisplay.innerHTML = `<span class="text-green-600">✅ Dekomprimiert:</span> <strong>${result}</strong>`;
+        savingsDisplay.classList.remove('hidden');
+        savingsDisplay.textContent = '🔄 Der ursprüngliche Text wurde perfekt wiederhergestellt!';
+      } catch(e) {
+        compDisplay.textContent = 'Fehler beim Dekomprimieren.';
+      }
+    }
+
+    btnCompress.addEventListener('click', () => {
+      mode = 'compress';
+      btnCompress.classList.add('active');
+      btnDecompress.classList.remove('active');
+      doCompress();
+    });
+    btnDecompress.addEventListener('click', () => {
+      mode = 'decompress';
+      btnDecompress.classList.add('active');
+      btnCompress.classList.remove('active');
+      doDecompress();
+    });
+
+    input.addEventListener('input', () => {
+      if (mode === 'compress') doCompress();
+    });
+
+    // Initial run
+    doCompress();
+  </script>
+</CodeLayout>

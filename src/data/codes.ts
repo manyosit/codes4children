@@ -88,6 +88,17 @@ export const codes: CodeInfo[] = [
     icon: '😎',
     metaDescription: 'Erstelle deine eigene Emoji-Geheimsprache. Interaktiver Emoji-Code für Kinder.',
   },
+  {
+    title: 'Komprimierung',
+    slug: 'komprimierung',
+    description: 'Mach große Dateien klein! Lerne, wie Computer Daten schrumpfen lassen — mit cleveren Wörterbuch-Tricks.',
+    shortDesc: 'Schrumpfe Daten wie ein ZIP-Zauberer.',
+    accentColor: '#0EA5E9',
+    accentColorLight: '#E0F2FE',
+    difficulty: 2,
+    icon: '🗜️',
+    metaDescription: 'Lerne wie Datenkomprimierung funktioniert und probiere sie selbst aus. Interaktive LZW-Komprimierung für Kinder.',
+  },
 ];
 
 export function getCodeBySlug(slug: string): CodeInfo | undefined {
