@@ -115,20 +115,38 @@ const funFacts = [
       output.textContent = textToMorse(input.value) || '…';
     });
 
+    let audioCtx = null;
+    function getAudioContext() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      return audioCtx;
+    }
+
     document.getElementById('btn-play-morse').addEventListener('click', async () => {
       const raw = textToMorseRaw(input.value);
       if (!raw) return;
-      const ctx = new AudioContext();
-      let time = ctx.currentTime;
+      const ctx = getAudioContext();
+      // iOS fix: play a silent buffer first to unlock audio
+      const silentBuf = ctx.createBuffer(1, 1, 22050);
+      const silentSrc = ctx.createBufferSource();
+      silentSrc.buffer = silentBuf;
+      silentSrc.connect(ctx.destination);
+      silentSrc.start(0);
+
+      let time = ctx.currentTime + 0.05;
       const dot = 0.1, dash = 0.3, gap = 0.1, letterGap = 0.3, wordGap = 0.7;
       for (const char of raw) {
         if (char === '.' || char === '-') {
           const osc = ctx.createOscillator();
-          osc.connect(ctx.destination);
+          const gain = ctx.createGain();
+          osc.connect(gain);
+          gain.connect(ctx.destination);
           osc.frequency.value = 600;
+          gain.gain.value = 1;
+          const dur = char === '.' ? dot : dash;
           osc.start(time);
-          osc.stop(time + (char === '.' ? dot : dash));
-          time += (char === '.' ? dot : dash) + gap;
+          osc.stop(time + dur);
+          time += dur + gap;
         } else if (char === '/') { time += wordGap; }
         else if (char === ' ') { time += letterGap; }
       }
