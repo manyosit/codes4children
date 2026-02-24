@@ -27,7 +27,7 @@ const currentPath = Astro.url.pathname;
               ]}
               style={isActive ? `color: ${code.accentColor}` : ''}
             >
-              <span class="text-base">{code.icon}</span>
+              <img src={`/icons/${code.slug}.png`} alt={code.title} class="w-5 h-5 object-contain" />
               <span class="hidden lg:inline">{code.title.split('-')[0].split(' ')[0]}</span>
             </a>
           );
