@@ -19,9 +19,9 @@ import { codes } from '../../data/codes';
       </div>
 
       <!-- Code Links -->
-      <div>
+      <div class="md:col-span-1">
         <h3 class="font-display font-bold text-sm text-gray-400 uppercase tracking-wider mb-4">Geheimcodes</h3>
-        <ul class="space-y-2">
+        <ul class="grid grid-cols-2 gap-x-6 gap-y-2">
           {codes.map(code => (
             <li>
               <a href={`/${code.slug}`} class="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2">
