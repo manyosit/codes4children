@@ -1,0 +1,28 @@
+# Codes4Kids
+
+> Geheimcodes & Chiffren für Kinder — interaktiv lernen und ausprobieren
+
+Codes4Kids ist eine kostenlose, kindgerechte Website zum Entdecken von Geheimcodes und Chiffren. Kinder lernen echte Verschlüsselungsmethoden kennen und können sie mit interaktiven Tools selbst ausprobieren.
+
+Betrieben von der [manyos technology GmbH](https://manyos.it).
+
+## Interaktive Codes
+
+Jede Seite erklärt einen Code mit Geschichte, Funktionsweise und einem interaktiven Übersetzer/Simulator zum Mitmachen.
+
+- [Caesar-Chiffre](https://codes4kids.de/caesar): Buchstaben im Alphabet verschieben — die berühmte Verschlüsselung von Julius Caesar
+- [Morse-Code](https://codes4kids.de/morse): Punkte und Striche — das Morse-Alphabet mit Übersetzer
+- [Zahlen-Code](https://codes4kids.de/zahlen): Buchstaben durch Zahlen ersetzen (A=1, B=2, ...)
+- [Emoji-Code](https://codes4kids.de/emoji): Geheime Nachrichten mit Emojis verschlüsseln
+- [Pigpen-Chiffre](https://codes4kids.de/pigpen): Die Geheimschrift der Freimaurer mit Gittersymbolen
+- [Skytale](https://codes4kids.de/skytale): Die älteste militärische Verschlüsselung der Spartaner — mit Bastel-Anleitung
+- [Spiegelschrift](https://codes4kids.de/spiegel): Text rückwärts und spiegelverkehrt schreiben — wie Leonardo da Vinci
+- [Komprimierung](https://codes4kids.de/komprimierung): Wie Computer Daten kleiner machen — Lauflängen-Kodierung zum Ausprobieren
+
+## Über das Projekt
+
+Codes4Kids entstand aus einer Vater-Tochter-Idee: kindgerechte, interaktive Erklärungen von Geheimcodes, die es so auf Deutsch kaum gibt. Kostenlos, werbefrei und zum Mitmachen.
+
+## Kontakt
+
+Betreiber: [manyos technology GmbH](https://manyos.it) — Robert Hannemann
