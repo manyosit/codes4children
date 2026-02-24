@@ -97,9 +97,16 @@ const funFacts = [
       </div>
 
       <!-- Alphabet display -->
-      <div class="card-static mt-6 p-6">
-        <h3 class="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4 text-center">Alphabet-Zuordnung</h3>
+      <div class="card-static mt-6 p-6" id="print-area">
+        <h3 class="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-2 text-center">Alphabet-Zuordnung</h3>
+        <p class="text-sm text-text-secondary text-center mb-4">🔑 Stelle oben deinen Schlüssel ein und drucke dir diese Karten aus — so kannst du mit deinen Freunden geheime Nachrichten ver- und entschlüsseln!</p>
         <div id="alphabet-display" class="grid grid-cols-6 sm:grid-cols-9 md:grid-cols-13 gap-2 max-w-2xl mx-auto"></div>
+        <div class="text-center mt-5 print:hidden">
+          <button id="btn-print" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:shadow-md" style={`background: ${code.accentColor}`}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg>
+            Karten ausdrucken
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -179,5 +186,30 @@ const funFacts = [
 
     input.addEventListener('input', doTransform);
     updateAlpha();
+
+    document.getElementById('btn-print').addEventListener('click', () => {
+      const printArea = document.getElementById('print-area');
+      const w = window.open('', '_blank');
+      w.document.write(`<!DOCTYPE html><html><head><title>Caesar-Chiffre Schlüssel</title><style>
+        body { font-family: Inter, system-ui, sans-serif; padding: 20px; }
+        h2 { text-align: center; margin-bottom: 4px; }
+        p { text-align: center; color: #64748B; font-size: 13px; margin-bottom: 16px; }
+        .grid { display: grid; grid-template-columns: repeat(13, 1fr); gap: 8px; max-width: 600px; margin: 0 auto; }
+        .card { border: 1.5px solid #E2E8F0; border-radius: 8px; padding: 8px 4px; text-align: center; }
+        .orig { font-weight: 700; font-size: 16px; }
+        .arrow { color: #cbd5e1; font-size: 10px; }
+        .shifted { font-weight: 700; font-size: 16px; color: ${accentColor}; }
+      </style></head><body>
+        <h2>🔑 Caesar-Chiffre — Schlüssel ${shift.value}</h2>
+        <p>Schneide die Karten aus und teile sie mit deinen Freunden!</p>
+        <div class="grid">${
+          'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map((c, i) => {
+            const s = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[(i + parseInt(shift.value)) % 26];
+            return '<div class="card"><div class="orig">'+c+'</div><div class="arrow">↓</div><div class="shifted">'+s+'</div></div>';
+          }).join('')
+        }</div></body></html>`);
+      w.document.close();
+      w.print();
+    });
   </script>
 </CodeLayout>
