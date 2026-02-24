@@ -1,105 +1,98 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import CodeLayout from '../layouts/CodeLayout.astro';
+import { getCodeBySlug } from '../data/codes';
+const code = getCodeBySlug('morse')!;
+const funFacts = [
+  { icon: '🆘', text: '<strong class="text-white">SOS</strong> (● ● ● ━ ━ ━ ● ● ●) ist das bekannteste Morse-Signal. Es wurde 1906 als internationales Notsignal eingeführt.' },
+  { icon: '📡', text: 'Der erste Morse-Telegraf übertrug 1844 die Nachricht <strong class="text-white">"What hath God wrought"</strong> über 60 km.' },
+];
 ---
-<Layout title="Morse-Code" emoji="📡">
-  <section class="section text-center max-w-3xl mx-auto px-6 pb-12">
-    <div class="text-6xl mb-6 animate-fade-in">📡</div>
-    <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-      <span class="gradient-text">Morse-Code</span>
-    </h1>
-    <p class="text-lg text-gray-500 max-w-xl mx-auto">
-      Punkte und Striche — damit wurde über riesige Entfernungen kommuniziert. Per Funk, Lichtsignal oder Klopfzeichen.
-    </p>
-  </section>
-
+<CodeLayout code={code} funFacts={funFacts}>
   <!-- Morse Alphabet -->
-  <section class="max-w-4xl mx-auto px-6 mb-16">
-    <div class="card">
-      <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-6 text-center">Das Morse-Alphabet</h2>
+  <section class="max-w-content mx-auto px-6 md:px-12 py-16">
+    <div class="card-static max-w-4xl mx-auto p-8">
+      <h2 class="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-6 text-center">Das Morse-Alphabet</h2>
       <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-2" id="morse-table"></div>
-      <p class="text-center text-sm text-gray-400 mt-4">● = kurz (dit) &nbsp;&nbsp; ━ = lang (dah)</p>
+      <p class="text-center text-sm text-text-secondary mt-4">● = kurz (dit) &nbsp;&nbsp; ━ = lang (dah)</p>
     </div>
   </section>
 
   <!-- Tool -->
-  <section class="bg-pastel-gray py-16">
-    <div class="max-w-3xl mx-auto px-6">
-      <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">Morse-Übersetzer</h2>
-      <div class="bg-white rounded-3xl p-8 shadow-soft">
+  <section class="py-16" style={`background: ${code.accentColor}08`}>
+    <div class="max-w-3xl mx-auto px-6 md:px-12">
+      <h2 class="font-display font-bold text-2xl md:text-3xl text-center mb-10">Morse-Übersetzer</h2>
+      <div class="card-static p-8">
         <div class="mb-6">
-          <label class="block text-sm font-semibold text-gray-700 mb-2">Dein Text</label>
+          <label class="block text-sm font-semibold text-text-primary mb-2">Dein Text</label>
           <input type="text" id="morse-input" placeholder="Schreibe hier..." class="tool-input" maxlength="50" />
         </div>
         <div class="flex gap-3 mb-8 flex-wrap">
-          <button id="btn-to-morse" class="btn btn-blue">Übersetzen</button>
-          <button id="btn-play-morse" class="btn btn-green">▶ Abspielen</button>
-          <button id="btn-flash-morse" class="btn btn-orange">💡 Blinken</button>
+          <button id="btn-to-morse" class="btn" style={`background: ${code.accentColor}`}>Übersetzen</button>
+          <button id="btn-play-morse" class="btn bg-secondary hover:bg-secondary-dark">▶ Abspielen</button>
+          <button id="btn-flash-morse" class="btn bg-accent hover:bg-amber-600">💡 Blinken</button>
         </div>
         <div>
-          <label class="block text-sm font-semibold text-gray-700 mb-2">Morse-Code</label>
-          <div id="morse-output" class="tool-output text-xl font-mono text-apple-blue text-center tracking-widest">…</div>
+          <label class="block text-sm font-semibold text-text-primary mb-2">Morse-Code</label>
+          <div id="morse-output" class="tool-output text-xl text-center tracking-widest"
+               style={`background: ${code.accentColor}10; border-left: 4px solid ${code.accentColor}; color: ${code.accentColor}`}>…</div>
         </div>
-        <div id="flash-area" class="hidden mt-6 rounded-2xl h-28 flex items-center justify-center text-3xl font-semibold transition-all duration-100"
-             style="background: #1D1D1F; color: white;">💡</div>
+        <div id="flash-area" class="hidden mt-6 rounded-xl h-28 flex items-center justify-center text-3xl font-semibold transition-all duration-100"
+             style="background: #1E293B; color: white;">💡</div>
       </div>
     </div>
   </section>
 
   <!-- SOS -->
-  <section class="section max-w-3xl mx-auto px-6">
-    <div class="card text-center">
-      <h2 class="text-2xl font-bold mb-3">🆘 Das berühmteste Signal</h2>
-      <p class="text-gray-500 mb-6">SOS — das internationale Notsignal. Super einfach zu merken:</p>
-      <div class="bg-pastel-blue rounded-2xl p-6 mb-4">
-        <p class="text-3xl font-mono font-bold tracking-widest text-apple-blue">● ● ●&nbsp;&nbsp;━ ━ ━&nbsp;&nbsp;● ● ●</p>
-        <p class="text-sm text-gray-500 mt-2">drei kurz — drei lang — drei kurz</p>
+  <section class="max-w-content mx-auto px-6 md:px-12 py-16">
+    <div class="card-static max-w-3xl mx-auto text-center p-8">
+      <h2 class="font-display font-bold text-2xl mb-3">🆘 Das berühmteste Signal</h2>
+      <p class="text-text-secondary mb-6">SOS — das internationale Notsignal:</p>
+      <div class="rounded-xl p-6 mb-4" style={`background: ${code.accentColorLight}`}>
+        <p class="text-3xl font-mono font-bold tracking-widest" style={`color: ${code.accentColor}`}>● ● ●&nbsp;&nbsp;━ ━ ━&nbsp;&nbsp;● ● ●</p>
+        <p class="text-sm text-text-secondary mt-2">drei kurz — drei lang — drei kurz</p>
       </div>
-      <p class="text-sm text-gray-400">
-        Du kannst SOS mit einer Taschenlampe signalisieren: 3× kurz blinken, 3× lang, 3× kurz.
-      </p>
     </div>
   </section>
 
-  <script>
-    const MORSE: Record<string, string> = {
+  <script define:vars={{ accentColor: code.accentColor, accentColorLight: code.accentColorLight }}>
+    const MORSE = {
       'A':'.-','B':'-...','C':'-.-.','D':'-..','E':'.','F':'..-.','G':'--.','H':'....','I':'..','J':'.---',
       'K':'-.-','L':'.-..','M':'--','N':'-.','O':'---','P':'.--.','Q':'--.-','R':'.-.','S':'...','T':'-',
       'U':'..-','V':'...-','W':'.--','X':'-..-','Y':'-.--','Z':'--..','0':'-----','1':'.----','2':'..---',
       '3':'...--','4':'....-','5':'.....','6':'-....','7':'--...','8':'---..','9':'----.'
     };
 
-    const table = document.getElementById('morse-table')!;
-    Object.entries(MORSE).forEach(([letter, code]) => {
-      const visual = code.replace(/\./g, '●').replace(/-/g, '━');
-      table.innerHTML += `<div class="bg-pastel-blue rounded-xl p-3 text-center">
-        <div class="text-lg font-bold text-gray-800">${letter}</div>
-        <div class="text-sm tracking-wider text-apple-blue font-mono">${visual}</div>
+    const table = document.getElementById('morse-table');
+    Object.entries(MORSE).forEach(([letter, c]) => {
+      const visual = c.replace(/\./g, '●').replace(/-/g, '━');
+      table.innerHTML += `<div class="rounded-xl p-3 text-center" style="background:${accentColorLight}">
+        <div class="text-lg font-bold text-text-primary">${letter}</div>
+        <div class="text-sm tracking-wider font-mono" style="color:${accentColor}">${visual}</div>
       </div>`;
     });
 
-    function textToMorse(text: string): string {
+    function textToMorse(text) {
       return text.toUpperCase().split('').map(c => {
         if (c === ' ') return ' / ';
         const m = MORSE[c];
         return m ? m.replace(/\./g, '●').replace(/-/g, '━') : '';
       }).join(' ');
     }
-
-    function textToMorseRaw(text: string): string {
+    function textToMorseRaw(text) {
       return text.toUpperCase().split('').map(c => {
         if (c === ' ') return '/';
         return MORSE[c] || '';
       }).join(' ');
     }
 
-    const input = document.getElementById('morse-input') as HTMLInputElement;
-    const output = document.getElementById('morse-output')!;
+    const input = document.getElementById('morse-input');
+    const output = document.getElementById('morse-output');
 
-    document.getElementById('btn-to-morse')!.addEventListener('click', () => {
+    document.getElementById('btn-to-morse').addEventListener('click', () => {
       output.textContent = textToMorse(input.value) || '…';
     });
 
-    document.getElementById('btn-play-morse')!.addEventListener('click', async () => {
+    document.getElementById('btn-play-morse').addEventListener('click', async () => {
       const raw = textToMorseRaw(input.value);
       if (!raw) return;
       const ctx = new AudioContext();
@@ -118,10 +111,10 @@ import Layout from '../layouts/Layout.astro';
       }
     });
 
-    document.getElementById('btn-flash-morse')!.addEventListener('click', async () => {
+    document.getElementById('btn-flash-morse').addEventListener('click', async () => {
       const raw = textToMorseRaw(input.value);
       if (!raw) return;
-      const flash = document.getElementById('flash-area')!;
+      const flash = document.getElementById('flash-area');
       flash.classList.remove('hidden');
       const dot = 150, dash = 450, gap = 150, letterGap = 350, wordGap = 700;
       for (const char of raw) {
@@ -129,7 +122,7 @@ import Layout from '../layouts/Layout.astro';
           flash.style.background = '#FFCC00';
           flash.textContent = '✨';
           await new Promise(r => setTimeout(r, char === '.' ? dot : dash));
-          flash.style.background = '#1D1D1F';
+          flash.style.background = '#1E293B';
           flash.textContent = '💡';
           await new Promise(r => setTimeout(r, gap));
         } else if (char === '/') { await new Promise(r => setTimeout(r, wordGap)); }
@@ -137,4 +130,4 @@ import Layout from '../layouts/Layout.astro';
       }
     });
   </script>
-</Layout>
+</CodeLayout>

@@ -1,79 +1,73 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import CodeLayout from '../layouts/CodeLayout.astro';
+import { getCodeBySlug } from '../data/codes';
+const code = getCodeBySlug('skytale')!;
+const funFacts = [
+  { icon: '⚔️', text: 'Die <strong class="text-white">Spartaner</strong> benutzten die Skytale schon vor über 2.500 Jahren im Krieg.' },
+  { icon: '📦', text: 'Du kannst eine Skytale <strong class="text-white">ganz einfach nachbauen</strong> — mit einem Besenstiel und einem Papierstreifen!' },
+];
 ---
-<Layout title="Skytale" emoji="📜">
-  <section class="section text-center max-w-3xl mx-auto px-6 pb-12">
-    <div class="text-6xl mb-6 animate-fade-in">📜</div>
-    <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-      <span class="gradient-text">Skytale</span>
-    </h1>
-    <p class="text-lg text-gray-500 max-w-xl mx-auto">
-      Die Spartaner wickelten einen Papierstreifen um einen Stock und schrieben quer darüber. Ohne den passenden Stock — nur Buchstabensalat.
-    </p>
-  </section>
-
+<CodeLayout code={code} funFacts={funFacts}>
   <!-- Steps -->
-  <section class="max-w-3xl mx-auto px-6 mb-16">
-    <div class="card">
-      <h2 class="text-2xl font-bold mb-6">So funktioniert's</h2>
+  <section class="max-w-content mx-auto px-6 md:px-12 py-16">
+    <div class="card-static max-w-3xl mx-auto p-8">
+      <h2 class="font-display font-bold text-2xl mb-6">So funktioniert's</h2>
       <div class="space-y-4">
-        <div class="flex items-start gap-4 bg-pastel-purple rounded-2xl p-5">
-          <span class="text-sm font-bold bg-apple-purple text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0">1</span>
-          <p class="text-gray-600">Wickle einen Papierstreifen spiralförmig um einen Stock.</p>
-        </div>
-        <div class="flex items-start gap-4 bg-pastel-indigo rounded-2xl p-5">
-          <span class="text-sm font-bold bg-apple-indigo text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0">2</span>
-          <p class="text-gray-600">Schreibe deine Nachricht quer über den Streifen.</p>
-        </div>
-        <div class="flex items-start gap-4 bg-pastel-blue rounded-2xl p-5">
-          <span class="text-sm font-bold bg-apple-blue text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0">3</span>
-          <p class="text-gray-600">Abgewickelt sieht die Nachricht aus wie Buchstabensalat.</p>
-        </div>
-        <div class="flex items-start gap-4 bg-pastel-green rounded-2xl p-5">
-          <span class="text-sm font-bold bg-apple-green text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0">4</span>
-          <p class="text-gray-600">Nur wer einen Stock gleicher Dicke hat, kann die Nachricht lesen.</p>
-        </div>
+        {[
+          { num: '1', text: 'Wickle einen Papierstreifen spiralförmig um einen Stock.', color: code.accentColor },
+          { num: '2', text: 'Schreibe deine Nachricht quer über den Streifen.', color: '#6366F1' },
+          { num: '3', text: 'Abgewickelt sieht die Nachricht aus wie Buchstabensalat.', color: '#3B82F6' },
+          { num: '4', text: 'Nur wer einen Stock gleicher Dicke hat, kann die Nachricht lesen.', color: '#10B981' },
+        ].map(step => (
+          <div class="flex items-start gap-4 rounded-xl p-5" style={`background: ${step.color}10`}>
+            <span class="text-sm font-bold text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0" style={`background: ${step.color}`}>{step.num}</span>
+            <p class="text-text-secondary">{step.text}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
   <!-- Tool -->
-  <section class="bg-pastel-gray py-16">
-    <div class="max-w-3xl mx-auto px-6">
-      <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">Skytale-Simulator</h2>
-      <div class="bg-white rounded-3xl p-8 shadow-soft">
+  <section class="py-16" style={`background: ${code.accentColor}08`}>
+    <div class="max-w-3xl mx-auto px-6 md:px-12">
+      <h2 class="font-display font-bold text-2xl md:text-3xl text-center mb-10">Skytale-Simulator</h2>
+      <div class="card-static p-8">
         <div class="mb-6">
-          <label class="block text-sm font-semibold text-gray-700 mb-2">Deine Nachricht</label>
+          <label class="block text-sm font-semibold text-text-primary mb-2">Deine Nachricht</label>
           <input type="text" id="skytale-input" placeholder="Schreibe hier..." class="tool-input" maxlength="60" />
         </div>
         <div class="mb-8">
-          <label class="block text-sm font-semibold text-gray-700 mb-2">
-            Stockbreite: <span id="cols-display" class="text-apple-purple">4</span>
+          <label class="block text-sm font-semibold text-text-primary mb-2">
+            Stockbreite: <span id="cols-display" style={`color: ${code.accentColor}`}>4</span>
           </label>
-          <input type="range" id="skytale-cols" min="2" max="10" value="4" />
+          <input type="range" id="skytale-cols" min="2" max="10" value="4" style={`accent-color: ${code.accentColor}`} />
         </div>
-        <div class="flex gap-3 mb-8 flex-wrap">
-          <button id="btn-encrypt-sky" class="btn btn-purple">Verschlüsseln</button>
-          <button id="btn-decrypt-sky" class="btn btn-indigo">Entschlüsseln</button>
+
+        <div class="segmented-control mb-8">
+          <button id="btn-encrypt-sky" class="active">Verschlüsseln</button>
+          <button id="btn-decrypt-sky">Entschlüsseln</button>
         </div>
+
         <div class="mb-6">
-          <label class="block text-sm font-semibold text-gray-400 mb-2">Auf dem Stock</label>
-          <div id="skytale-grid" class="bg-pastel-gray rounded-2xl p-4 flex flex-wrap gap-1 justify-center min-h-[60px]"></div>
+          <label class="block text-sm font-semibold text-text-secondary mb-2">Auf dem Stock</label>
+          <div id="skytale-grid" class="bg-gray-50 rounded-xl p-4 flex flex-wrap gap-1 justify-center min-h-[60px]"></div>
         </div>
         <div>
-          <label class="block text-sm font-semibold text-gray-400 mb-2">Ergebnis</label>
-          <div id="skytale-output" class="tool-output text-xl font-mono font-semibold text-apple-purple text-center">…</div>
+          <label class="block text-sm font-semibold text-text-secondary mb-2">Ergebnis</label>
+          <div id="skytale-output" class="tool-output text-xl font-semibold text-center"
+               style={`background: ${code.accentColor}10; border-left: 4px solid ${code.accentColor}; color: ${code.accentColor}`}>…</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- DIY -->
-  <section class="section max-w-3xl mx-auto px-6">
-    <div class="card">
-      <h2 class="text-2xl font-bold mb-6">Bastle deine eigene Skytale</h2>
-      <div class="space-y-3 text-gray-500">
-        <p>📦 <strong class="text-gray-900">Du brauchst:</strong> Einen runden Stock und einen langen Papierstreifen</p>
+  <section class="max-w-content mx-auto px-6 md:px-12 py-16">
+    <div class="card-static max-w-3xl mx-auto p-8">
+      <h2 class="font-display font-bold text-2xl mb-6">Bastle deine eigene Skytale</h2>
+      <div class="space-y-3 text-text-secondary">
+        <p>📦 <strong class="text-text-primary">Du brauchst:</strong> Einen runden Stock und einen langen Papierstreifen</p>
         <p>✂️ Schneide einen Streifen (ca. 2 cm breit, 30 cm lang)</p>
         <p>🔄 Wickle ihn eng um den Stock</p>
         <p>✍️ Schreibe deine Nachricht quer über die Windungen</p>
@@ -82,33 +76,35 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <script>
-    const input = document.getElementById('skytale-input') as HTMLInputElement;
-    const colsSlider = document.getElementById('skytale-cols') as HTMLInputElement;
-    const colsDisplay = document.getElementById('cols-display')!;
-    const grid = document.getElementById('skytale-grid')!;
-    const output = document.getElementById('skytale-output')!;
+  <script define:vars={{ accentColor: code.accentColor }}>
+    const input = document.getElementById('skytale-input');
+    const colsSlider = document.getElementById('skytale-cols');
+    const colsDisplay = document.getElementById('cols-display');
+    const grid = document.getElementById('skytale-grid');
+    const output = document.getElementById('skytale-output');
+    const btnEncrypt = document.getElementById('btn-encrypt-sky');
+    const btnDecrypt = document.getElementById('btn-decrypt-sky');
 
     colsSlider.addEventListener('input', () => { colsDisplay.textContent = colsSlider.value; });
 
-    const pastelColors = ['bg-pastel-purple','bg-pastel-indigo','bg-pastel-blue','bg-pastel-green','bg-pastel-orange','bg-pastel-pink','bg-pastel-yellow'];
+    const rowColors = ['#8B5CF610','#6366F110','#3B82F610','#10B98110','#F59E0B10','#EC489910','#F9731610'];
 
-    function encrypt(text: string, cols: number) {
+    function encrypt(text, cols) {
       const clean = text.toUpperCase().replace(/[^A-ZÄÖÜß ]/g, '');
       const rows = Math.ceil(clean.length / cols);
       const padded = clean.padEnd(rows * cols, '·');
-      const g: string[][] = [];
+      const g = [];
       for (let r = 0; r < rows; r++) g.push(padded.slice(r * cols, (r+1) * cols).split(''));
       let result = '';
       for (let c = 0; c < cols; c++) for (let r = 0; r < rows; r++) result += g[r][c];
       return { grid: g, result };
     }
 
-    function decrypt(text: string, cols: number) {
+    function decrypt(text, cols) {
       const clean = text.toUpperCase();
       const rows = Math.ceil(clean.length / cols);
       const padded = clean.padEnd(rows * cols, '·');
-      const g: string[][] = Array.from({length: rows}, () => Array(cols).fill('·'));
+      const g = Array.from({length: rows}, () => Array(cols).fill('·'));
       let idx = 0;
       for (let c = 0; c < cols; c++) for (let r = 0; r < rows; r++) g[r][c] = padded[idx++] || '·';
       let result = '';
@@ -116,24 +112,33 @@ import Layout from '../layouts/Layout.astro';
       return { grid: g, result: result.replace(/·/g, '').trim() };
     }
 
-    function showGrid(g: string[][], cols: number) {
+    function showGrid(g, cols) {
       grid.style.cssText = `display:grid;grid-template-columns:repeat(${cols},1fr);max-width:${cols*3.5}rem;margin:0 auto;`;
       grid.innerHTML = g.map((row, ri) =>
-        row.map(c => `<div class="${pastelColors[ri % pastelColors.length]} rounded-lg p-2 text-center font-mono font-semibold text-sm">${c}</div>`).join('')
+        row.map(c => `<div class="rounded-lg p-2 text-center font-mono font-semibold text-sm" style="background:${rowColors[ri % rowColors.length]}">${c}</div>`).join('')
       ).join('');
     }
 
-    document.getElementById('btn-encrypt-sky')!.addEventListener('click', () => {
+    let mode = 'encrypt';
+    btnEncrypt.addEventListener('click', () => {
+      mode = 'encrypt';
+      btnEncrypt.classList.add('active');
+      btnDecrypt.classList.remove('active');
+      doTransform();
+    });
+    btnDecrypt.addEventListener('click', () => {
+      mode = 'decrypt';
+      btnDecrypt.classList.add('active');
+      btnEncrypt.classList.remove('active');
+      doTransform();
+    });
+
+    function doTransform() {
       const cols = parseInt(colsSlider.value);
-      const { grid: g, result } = encrypt(input.value, cols);
+      const fn = mode === 'encrypt' ? encrypt : decrypt;
+      const { grid: g, result } = fn(input.value, cols);
       showGrid(g, cols);
       output.textContent = result;
-    });
-    document.getElementById('btn-decrypt-sky')!.addEventListener('click', () => {
-      const cols = parseInt(colsSlider.value);
-      const { grid: g, result } = decrypt(input.value, cols);
-      showGrid(g, cols);
-      output.textContent = result;
-    });
+    }
   </script>
-</Layout>
+</CodeLayout>

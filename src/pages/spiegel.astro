@@ -1,80 +1,67 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import CodeLayout from '../layouts/CodeLayout.astro';
+import { getCodeBySlug } from '../data/codes';
+const code = getCodeBySlug('spiegel')!;
+const funFacts = [
+  { icon: '🧑‍🎨', text: '<strong class="text-white">Leonardo da Vinci</strong> war Linkshänder und schrieb fast alle seine Notizen in Spiegelschrift — über 13.000 Seiten.' },
+  { icon: '🤔', text: 'Forscher sind sich nicht einig, ob er seine Ideen <strong class="text-white">geheim halten</strong> wollte, oder ob es als Linkshänder einfach bequemer war.' },
+];
 ---
-<Layout title="Spiegelschrift" emoji="🪞">
-  <section class="section text-center max-w-3xl mx-auto px-6 pb-12">
-    <div class="text-6xl mb-6 animate-fade-in">🪞</div>
-    <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-      <span class="gradient-text">Spiegelschrift</span>
-    </h1>
-    <p class="text-lg text-gray-500 max-w-xl mx-auto">
-      Leonardo da Vinci schrieb seine geheimen Notizbücher in Spiegelschrift. Man braucht einen Spiegel zum Lesen.
-    </p>
-  </section>
-
+<CodeLayout code={code} funFacts={funFacts}>
   <!-- How it works -->
-  <section class="max-w-3xl mx-auto px-6 mb-16">
-    <div class="card">
-      <h2 class="text-2xl font-bold mb-4">So funktioniert's</h2>
-      <p class="text-gray-500 mb-6">Text wird rückwärts geschrieben. Vor einem Spiegel wird er wieder lesbar.</p>
-      <div class="bg-pastel-pink rounded-2xl p-6 text-center">
-        <p class="text-lg mb-1 text-gray-500">Normal: <strong class="text-gray-900 text-2xl">GEHEIM</strong></p>
-        <p class="text-lg text-gray-500">Gespiegelt: <strong class="text-apple-pink text-2xl" style="direction:rtl;unicode-bidi:bidi-override;">GEHEIM</strong></p>
+  <section class="max-w-content mx-auto px-6 md:px-12 py-16">
+    <div class="card-static max-w-3xl mx-auto p-8">
+      <h2 class="font-display font-bold text-2xl mb-4">So funktioniert's</h2>
+      <p class="text-text-secondary mb-6">Text wird rückwärts geschrieben. Vor einem Spiegel wird er wieder lesbar.</p>
+      <div class="rounded-xl p-6 text-center" style={`background: ${code.accentColorLight}`}>
+        <p class="text-lg mb-1 text-text-secondary">Normal: <strong class="text-text-primary text-2xl">GEHEIM</strong></p>
+        <p class="text-lg text-text-secondary">Gespiegelt: <strong class="text-2xl" style={`color: ${code.accentColor}; direction:rtl; unicode-bidi:bidi-override;`}>GEHEIM</strong></p>
       </div>
     </div>
   </section>
 
   <!-- Tool -->
-  <section class="bg-pastel-gray py-16">
-    <div class="max-w-3xl mx-auto px-6">
-      <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">Spiegel-Maschine</h2>
-      <div class="bg-white rounded-3xl p-8 shadow-soft">
+  <section class="py-16" style={`background: ${code.accentColor}08`}>
+    <div class="max-w-3xl mx-auto px-6 md:px-12">
+      <h2 class="font-display font-bold text-2xl md:text-3xl text-center mb-10">Spiegel-Maschine</h2>
+      <div class="card-static p-8">
         <div class="mb-6">
-          <label class="block text-sm font-semibold text-gray-700 mb-2">Dein Text</label>
+          <label class="block text-sm font-semibold text-text-primary mb-2">Dein Text</label>
           <input type="text" id="mirror-input" placeholder="Schreibe hier..." class="tool-input" maxlength="50" />
         </div>
-        <button id="btn-mirror" class="btn btn-pink mb-8">Spiegeln</button>
+        <button id="btn-mirror" class="btn mb-8" style={`background: ${code.accentColor}`}>Spiegeln</button>
         <div class="grid md:grid-cols-2 gap-6">
           <div>
-            <label class="block text-sm font-semibold text-gray-400 mb-2">Rückwärts</label>
-            <div id="mirror-reversed" class="tool-output text-xl font-semibold text-apple-pink text-center">…</div>
+            <label class="block text-sm font-semibold text-text-secondary mb-2">Rückwärts</label>
+            <div id="mirror-reversed" class="tool-output text-xl font-semibold text-center"
+                 style={`background: ${code.accentColor}10; border-left: 4px solid ${code.accentColor}; color: ${code.accentColor}`}>…</div>
           </div>
           <div>
-            <label class="block text-sm font-semibold text-gray-400 mb-2">Echte Spiegelschrift</label>
-            <div id="mirror-flipped" class="tool-output text-xl font-semibold text-apple-purple text-center" style="transform:scaleX(-1)">…</div>
+            <label class="block text-sm font-semibold text-text-secondary mb-2">Echte Spiegelschrift</label>
+            <div id="mirror-flipped" class="tool-output text-xl font-semibold text-center"
+                 style={`background: #8B5CF610; border-left: 4px solid #8B5CF6; color: #8B5CF6; transform: scaleX(-1)`}>…</div>
           </div>
         </div>
       </div>
 
       <!-- Live mirror -->
-      <div class="bg-white rounded-3xl p-8 shadow-soft mt-6 text-center">
-        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Live-Spiegel</h3>
+      <div class="card-static mt-6 p-8 text-center">
+        <h3 class="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">Live-Spiegel</h3>
         <input type="text" id="live-input" placeholder="Tippe hier..." class="tool-input text-center text-2xl mb-6" maxlength="30" />
-        <div id="live-mirror" class="text-4xl md:text-5xl font-bold text-apple-purple py-6 bg-pastel-purple rounded-2xl" style="transform:scaleX(-1)">…</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Leonardo -->
-  <section class="section max-w-3xl mx-auto px-6">
-    <div class="card">
-      <h2 class="text-2xl font-bold mb-6">Wusstest du?</h2>
-      <div class="space-y-4 text-base text-gray-500">
-        <p>🧑‍🎨 <strong class="text-gray-900">Leonardo da Vinci</strong> war Linkshänder und schrieb fast alle seine Notizen in Spiegelschrift — über 13.000 Seiten.</p>
-        <p>🤔 Forscher sind sich nicht einig, ob er seine Ideen geheim halten wollte, oder ob es als Linkshänder einfach bequemer war.</p>
-        <p>✏️ <strong class="text-gray-900">Probier's aus:</strong> Schreibe deinen Namen auf Papier in Spiegelschrift und halte ihn vor einen Spiegel.</p>
+        <div id="live-mirror" class="text-4xl md:text-5xl font-bold py-6 rounded-xl"
+             style={`color: ${code.accentColor}; background: ${code.accentColorLight}; transform: scaleX(-1)`}>…</div>
       </div>
     </div>
   </section>
 
   <script>
-    document.getElementById('btn-mirror')!.addEventListener('click', () => {
-      const text = (document.getElementById('mirror-input') as HTMLInputElement).value;
-      document.getElementById('mirror-reversed')!.textContent = text.split('').reverse().join('') || '…';
-      document.getElementById('mirror-flipped')!.textContent = text || '…';
+    document.getElementById('btn-mirror').addEventListener('click', () => {
+      const text = document.getElementById('mirror-input').value;
+      document.getElementById('mirror-reversed').textContent = text.split('').reverse().join('') || '…';
+      document.getElementById('mirror-flipped').textContent = text || '…';
     });
-    document.getElementById('live-input')!.addEventListener('input', (e) => {
-      document.getElementById('live-mirror')!.textContent = (e.target as HTMLInputElement).value || '…';
+    document.getElementById('live-input').addEventListener('input', (e) => {
+      document.getElementById('live-mirror').textContent = e.target.value || '…';
     });
   </script>
-</Layout>
+</CodeLayout>

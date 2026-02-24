@@ -1,0 +1,49 @@
+---
+import { codes } from '../../data/codes';
+---
+<footer class="bg-surface-darker text-text-light mt-24">
+  <div class="max-w-content mx-auto px-6 md:px-12 py-16">
+    <div class="grid md:grid-cols-3 gap-12 md:gap-8">
+      <!-- Brand -->
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-2xl">🔐</span>
+          <span class="font-display font-bold text-lg text-white">Codes4Children</span>
+        </div>
+        <p class="text-sm text-gray-400 leading-relaxed mb-4">
+          Entdecke die faszinierende Welt der Geheimcodes und Chiffren. Für junge Agenten von 8 bis 12 Jahren.
+        </p>
+        <p class="text-xs text-gray-500">
+          Ein Projekt der <a href="https://manyos.it" target="_blank" rel="noopener" class="text-gray-400 hover:text-white transition-colors">manyos technology GmbH</a>
+        </p>
+      </div>
+
+      <!-- Code Links -->
+      <div>
+        <h3 class="font-display font-bold text-sm text-gray-400 uppercase tracking-wider mb-4">Geheimcodes</h3>
+        <ul class="space-y-2">
+          {codes.map(code => (
+            <li>
+              <a href={`/${code.slug}`} class="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+                <span>{code.icon}</span> {code.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h3 class="font-display font-bold text-sm text-gray-400 uppercase tracking-wider mb-4">Rechtliches</h3>
+        <ul class="space-y-2">
+          <li><a href="https://manyos.it/impressum" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition-colors">Impressum</a></li>
+          <li><a href="https://manyos.it/datenschutz" target="_blank" rel="noopener" class="text-sm text-gray-400 hover:text-white transition-colors">Datenschutz</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+      <p class="text-xs text-gray-600">© {new Date().getFullYear()} Codes4Children. Mit 🔐 gemacht für neugierige Kinder.</p>
+    </div>
+  </div>
+</footer>

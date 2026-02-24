@@ -1,59 +1,56 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import CodeLayout from '../layouts/CodeLayout.astro';
+import { getCodeBySlug } from '../data/codes';
+const code = getCodeBySlug('emoji')!;
+const funFacts = [
+  { icon: '📱', text: 'Es gibt über <strong class="text-white">3.600 verschiedene Emojis</strong> — genug für tausende Geheimsprachen!' },
+  { icon: '🌍', text: 'Das Wort "Emoji" kommt aus dem Japanischen: <strong class="text-white">e</strong> (Bild) + <strong class="text-white">moji</strong> (Zeichen).' },
+];
 ---
-<Layout title="Emoji-Code" emoji="😎">
-  <section class="section text-center max-w-3xl mx-auto px-6 pb-12">
-    <div class="text-6xl mb-6 animate-fade-in">😎</div>
-    <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-      <span class="gradient-text-warm">Emoji-Code</span>
-    </h1>
-    <p class="text-lg text-gray-500 max-w-xl mx-auto">
-      Erstelle deine eigene Geheimsprache mit Emojis. Nur wer den Schlüssel kennt, kann deine Nachrichten lesen.
-    </p>
-  </section>
-
+<CodeLayout code={code} funFacts={funFacts}>
   <!-- Key display -->
-  <section class="max-w-4xl mx-auto px-6 mb-16">
-    <div class="card">
-      <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-6 text-center">Aktueller Schlüssel</h2>
+  <section class="max-w-content mx-auto px-6 md:px-12 py-16">
+    <div class="card-static max-w-4xl mx-auto p-8">
+      <h2 class="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-6 text-center">Aktueller Schlüssel</h2>
       <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-13 gap-2" id="emoji-key"></div>
     </div>
   </section>
 
   <!-- Tool -->
-  <section class="bg-pastel-gray py-16">
-    <div class="max-w-3xl mx-auto px-6">
-      <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">Emoji-Übersetzer</h2>
-      <div class="bg-white rounded-3xl p-8 shadow-soft">
+  <section class="py-16" style={`background: ${code.accentColor}08`}>
+    <div class="max-w-3xl mx-auto px-6 md:px-12">
+      <h2 class="font-display font-bold text-2xl md:text-3xl text-center mb-10">Emoji-Übersetzer</h2>
+      <div class="card-static p-8">
         <!-- Emoji set selection -->
         <div class="mb-6">
-          <label class="block text-sm font-semibold text-gray-700 mb-3">Emoji-Set</label>
+          <label class="block text-sm font-semibold text-text-primary mb-3">Emoji-Set</label>
           <div class="flex flex-wrap gap-2">
-            <button class="emoji-set-btn btn btn-orange text-sm !px-5 !py-2.5 !min-h-0" data-set="animals">🐱 Tiere</button>
-            <button class="emoji-set-btn btn btn-pink text-sm !px-5 !py-2.5 !min-h-0" data-set="food">🍕 Essen</button>
-            <button class="emoji-set-btn btn btn-blue text-sm !px-5 !py-2.5 !min-h-0" data-set="space">🚀 Weltraum</button>
-            <button class="emoji-set-btn btn btn-green text-sm !px-5 !py-2.5 !min-h-0" data-set="nature">🌸 Natur</button>
-            <button class="emoji-set-btn btn btn-indigo text-sm !px-5 !py-2.5 !min-h-0" data-set="faces">😀 Gesichter</button>
+            <button class="emoji-set-btn btn text-sm !px-4 !py-2 !min-h-0" style={`background: ${code.accentColor}`} data-set="animals">🐱 Tiere</button>
+            <button class="emoji-set-btn btn text-sm !px-4 !py-2 !min-h-0 bg-pink-500" data-set="food">🍕 Essen</button>
+            <button class="emoji-set-btn btn text-sm !px-4 !py-2 !min-h-0 bg-blue-500" data-set="space">🚀 Weltraum</button>
+            <button class="emoji-set-btn btn text-sm !px-4 !py-2 !min-h-0 bg-green-500" data-set="nature">🌸 Natur</button>
+            <button class="emoji-set-btn btn text-sm !px-4 !py-2 !min-h-0 bg-primary" data-set="faces">😀 Gesichter</button>
           </div>
         </div>
 
         <div class="mb-6">
-          <label class="block text-sm font-semibold text-gray-700 mb-2">Deine Nachricht</label>
+          <label class="block text-sm font-semibold text-text-primary mb-2">Deine Nachricht</label>
           <input type="text" id="emoji-input" placeholder="Schreibe hier..." class="tool-input" maxlength="50" />
         </div>
 
         <div class="flex gap-3 mb-8 flex-wrap">
-          <button id="btn-to-emoji" class="btn btn-orange">In Emojis</button>
-          <button id="btn-from-emoji" class="btn btn-indigo">Entschlüsseln</button>
-          <button id="btn-shuffle" class="btn btn-purple">🔀 Mischen</button>
+          <button id="btn-to-emoji" class="btn" style={`background: ${code.accentColor}`}>In Emojis</button>
+          <button id="btn-from-emoji" class="btn bg-primary">Entschlüsseln</button>
+          <button id="btn-shuffle" class="btn bg-code-caesar">🔀 Mischen</button>
         </div>
 
         <div>
-          <label class="block text-sm font-semibold text-gray-400 mb-2">Ergebnis</label>
-          <div id="emoji-output" class="tool-output text-3xl text-center tracking-wider">…</div>
+          <label class="block text-sm font-semibold text-text-secondary mb-2">Ergebnis</label>
+          <div id="emoji-output" class="tool-output text-3xl text-center tracking-wider"
+               style={`background: ${code.accentColor}10; border-left: 4px solid ${code.accentColor}`}>…</div>
         </div>
 
-        <button id="btn-copy" class="btn-outline border-gray-200 text-gray-500 hover:bg-gray-50 mt-4 text-sm !px-5 !py-2.5 !min-h-0">
+        <button id="btn-copy" class="mt-4 text-sm px-4 py-2 rounded-xl border-2 border-gray-200 text-text-secondary hover:bg-gray-50 transition-colors">
           📋 Kopieren
         </button>
       </div>
@@ -61,10 +58,10 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- Tips -->
-  <section class="section max-w-3xl mx-auto px-6">
-    <div class="card">
-      <h2 class="text-2xl font-bold mb-6">Tipps für Profis</h2>
-      <div class="space-y-3 text-gray-500">
+  <section class="max-w-content mx-auto px-6 md:px-12 py-16">
+    <div class="card-static max-w-3xl mx-auto p-8">
+      <h2 class="font-display font-bold text-2xl mb-6">Tipps für Profis</h2>
+      <div class="space-y-3 text-text-secondary">
         <p>📱 Schicke Emoji-Nachrichten über WhatsApp — niemand weiß, was sie bedeuten.</p>
         <p>📝 Schreibe den Schlüssel auf und gib ihn nur deinen besten Freunden.</p>
         <p>🔄 Wechsle den Schlüssel regelmäßig für extra Sicherheit.</p>
@@ -73,9 +70,9 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <script>
+  <script define:vars={{ accentColor: code.accentColor, accentColorLight: code.accentColorLight }}>
     const ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const emojiSets: Record<string, string[]> = {
+    const emojiSets = {
       animals: ['🐱','🐶','🐭','🐹','🐰','🦊','🐻','🐼','🐨','🐯','🦁','🐮','🐷','🐸','🐵','🐔','🐧','🐦','🐤','🦋','🐌','🐛','🐝','🐞','🦄','🐢'],
       food: ['🍎','🍐','🍊','🍋','🍌','🍉','🍇','🍓','🫐','🍒','🥝','🍕','🌮','🍔','🌭','🍩','🧁','🍪','🍫','🍿','🥨','🥕','🌽','🍄','🥑','🍰'],
       space: ['🚀','🌍','🌙','⭐','🌟','💫','☄️','🪐','🌞','🌛','🌠','🔭','👽','🛸','🌌','✨','🌈','⚡','🔥','💎','🎆','🌊','❄️','🌪️','☀️','🌑'],
@@ -86,23 +83,22 @@ import Layout from '../layouts/Layout.astro';
     let currentEmojis = [...emojiSets.animals];
 
     function updateKeyDisplay() {
-      const html = ALPHA.split('').map((l, i) =>
-        `<div class="bg-pastel-orange rounded-xl p-2.5 text-center">
+      document.getElementById('emoji-key').innerHTML = ALPHA.split('').map((l, i) =>
+        `<div class="rounded-xl p-2.5 text-center" style="background:${accentColorLight}">
           <div class="text-sm font-bold text-gray-800">${l}</div>
           <div class="text-xl">${currentEmojis[i]}</div>
         </div>`
       ).join('');
-      document.getElementById('emoji-key')!.innerHTML = html;
     }
 
     document.querySelectorAll('.emoji-set-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        currentEmojis = [...emojiSets[(btn as HTMLElement).dataset.set!]];
+        currentEmojis = [...emojiSets[btn.dataset.set]];
         updateKeyDisplay();
       });
     });
 
-    document.getElementById('btn-shuffle')!.addEventListener('click', () => {
+    document.getElementById('btn-shuffle').addEventListener('click', () => {
       for (let i = currentEmojis.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [currentEmojis[i], currentEmojis[j]] = [currentEmojis[j], currentEmojis[i]];
@@ -110,34 +106,34 @@ import Layout from '../layouts/Layout.astro';
       updateKeyDisplay();
     });
 
-    document.getElementById('btn-to-emoji')!.addEventListener('click', () => {
-      const text = (document.getElementById('emoji-input') as HTMLInputElement).value.toUpperCase();
+    document.getElementById('btn-to-emoji').addEventListener('click', () => {
+      const text = document.getElementById('emoji-input').value.toUpperCase();
       const result = text.split('').map(c => {
         if (c === ' ') return '  ';
         const i = ALPHA.indexOf(c);
         return i >= 0 ? currentEmojis[i] : c;
       }).join('');
-      document.getElementById('emoji-output')!.textContent = result || '…';
+      document.getElementById('emoji-output').textContent = result || '…';
     });
 
-    document.getElementById('btn-from-emoji')!.addEventListener('click', () => {
-      const text = (document.getElementById('emoji-input') as HTMLInputElement).value;
+    document.getElementById('btn-from-emoji').addEventListener('click', () => {
+      const text = document.getElementById('emoji-input').value;
       const result = [...text].map(c => {
         if (c === ' ') return ' ';
         const i = currentEmojis.indexOf(c);
         return i >= 0 ? ALPHA[i] : c;
       }).join('');
-      document.getElementById('emoji-output')!.textContent = result || '…';
+      document.getElementById('emoji-output').textContent = result || '…';
     });
 
-    document.getElementById('btn-copy')!.addEventListener('click', () => {
-      const text = document.getElementById('emoji-output')!.textContent || '';
+    document.getElementById('btn-copy').addEventListener('click', () => {
+      const text = document.getElementById('emoji-output').textContent || '';
       navigator.clipboard.writeText(text);
-      const btn = document.getElementById('btn-copy')!;
+      const btn = document.getElementById('btn-copy');
       btn.textContent = '✅ Kopiert!';
       setTimeout(() => btn.textContent = '📋 Kopieren', 2000);
     });
 
     updateKeyDisplay();
   </script>
-</Layout>
+</CodeLayout>

@@ -1,0 +1,68 @@
+---
+import { codes } from '../../data/codes';
+const currentPath = Astro.url.pathname;
+const mainCodes = codes.slice(0, 4);
+const moreCodes = codes.slice(4);
+---
+<nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-xl border-t border-gray-200/60 safe-area-bottom" aria-label="Mobile Navigation">
+  <div class="flex items-center justify-around px-2 py-2">
+    <a href="/" class:list={[
+      'flex flex-col items-center gap-0.5 px-2 py-1 rounded-xl text-xs font-medium transition-colors',
+      (currentPath === '/' || currentPath === '') ? 'text-primary' : 'text-text-secondary'
+    ]}>
+      <span class="text-xl">🏠</span>
+      <span>Start</span>
+    </a>
+    {mainCodes.map(code => {
+      const isActive = currentPath === `/${code.slug}` || currentPath === `/${code.slug}/`;
+      return (
+        <a href={`/${code.slug}`} class:list={[
+          'flex flex-col items-center gap-0.5 px-2 py-1 rounded-xl text-xs font-medium transition-colors',
+          isActive ? '' : 'text-text-secondary'
+        ]} style={isActive ? `color: ${code.accentColor}` : ''}>
+          <span class="text-xl">{code.icon}</span>
+          <span>{code.slug.charAt(0).toUpperCase() + code.slug.slice(1, 6)}</span>
+        </a>
+      );
+    })}
+    <button id="more-nav-btn" class="flex flex-col items-center gap-0.5 px-2 py-1 rounded-xl text-xs font-medium text-text-secondary" aria-label="Mehr Codes">
+      <span class="text-xl">•••</span>
+      <span>Mehr</span>
+    </button>
+  </div>
+
+  <!-- More panel -->
+  <div id="more-nav-panel" class="hidden absolute bottom-full left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-gray-100 shadow-lifted p-4">
+    <div class="grid grid-cols-3 gap-3">
+      {moreCodes.map(code => {
+        const isActive = currentPath === `/${code.slug}` || currentPath === `/${code.slug}/`;
+        return (
+          <a href={`/${code.slug}`} class:list={[
+            'flex flex-col items-center gap-1 p-3 rounded-xl text-xs font-medium transition-colors',
+            isActive ? 'bg-gray-100' : 'hover:bg-gray-50 text-text-secondary'
+          ]} style={isActive ? `color: ${code.accentColor}` : ''}>
+            <span class="text-2xl">{code.icon}</span>
+            <span>{code.title.split('-')[0].split(' ')[0]}</span>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</nav>
+
+<script>
+  const btn = document.getElementById('more-nav-btn');
+  const panel = document.getElementById('more-nav-panel');
+  btn?.addEventListener('click', () => panel?.classList.toggle('hidden'));
+  document.addEventListener('click', (e) => {
+    if (!btn?.contains(e.target as Node) && !panel?.contains(e.target as Node)) {
+      panel?.classList.add('hidden');
+    }
+  });
+</script>
+
+<style>
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+</style>

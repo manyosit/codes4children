@@ -1,105 +1,104 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import CodeLayout from '../layouts/CodeLayout.astro';
+import { getCodeBySlug } from '../data/codes';
+const code = getCodeBySlug('caesar')!;
+const funFacts = [
+  { icon: '🏛️', text: '<strong class="text-white">Julius Caesar</strong> hat vor über 2.000 Jahren geheime Nachrichten an seine Generäle geschickt — mit genau dieser Methode.' },
+  { icon: '🔢', text: 'Caesar benutzte meist eine Verschiebung von <strong class="text-white">3</strong>. Heute wäre das in Sekunden geknackt.' },
+];
 ---
-<Layout title="Caesar-Chiffre" emoji="🏛️">
-  <!-- Hero -->
-  <section class="section text-center max-w-3xl mx-auto px-6 pb-12">
-    <div class="text-6xl mb-6 animate-fade-in">🏛️</div>
-    <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-      <span class="gradient-text-warm">Caesar-Chiffre</span>
-    </h1>
-    <p class="text-lg text-gray-500 max-w-xl mx-auto">
-      Julius Caesar verschlüsselte seine Botschaften, indem er jeden Buchstaben im Alphabet verschob. Einfach — aber genial.
-    </p>
-  </section>
-
+<CodeLayout code={code} funFacts={funFacts}>
   <!-- How it works -->
-  <section class="max-w-3xl mx-auto px-6 mb-16">
-    <div class="card">
-      <h2 class="text-2xl font-bold mb-4">So funktioniert's</h2>
-      <p class="text-gray-500 mb-6">Verschiebe das Alphabet um eine bestimmte Anzahl Stellen:</p>
-      <div class="bg-pastel-gray rounded-2xl p-5 font-mono text-sm md:text-base overflow-x-auto mb-6">
-        <p><span class="text-gray-400 mr-2">Normal:</span>  A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
-        <p class="text-apple-orange font-semibold"><span class="text-gray-400 mr-2 font-normal">+3:</span>     D E F G H I J K L M N O P Q R S T U V W X Y Z A B C</p>
+  <section class="max-w-content mx-auto px-6 md:px-12 py-16">
+    <div class="card-static max-w-3xl mx-auto">
+      <h2 class="font-display font-bold text-2xl mb-4">So funktioniert's</h2>
+      <p class="text-text-secondary mb-6">Verschiebe das Alphabet um eine bestimmte Anzahl Stellen:</p>
+      <div class="bg-gray-50 rounded-xl p-5 font-mono text-sm md:text-base overflow-x-auto mb-6">
+        <p><span class="text-text-secondary mr-2">Normal:</span>  A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
+        <p class="font-semibold" style={`color: ${code.accentColor}`}><span class="text-text-secondary mr-2 font-normal">+3:</span>     D E F G H I J K L M N O P Q R S T U V W X Y Z A B C</p>
       </div>
-      <div class="bg-pastel-orange rounded-2xl p-6 text-center">
+      <div class="rounded-xl p-6 text-center" style={`background: ${code.accentColorLight}`}>
         <p class="text-lg">
-          <span class="text-gray-500">HALLO</span>
+          <span class="text-text-secondary">HALLO</span>
           <span class="mx-3 text-gray-300">→</span>
-          <span class="text-apple-orange font-bold text-2xl">KDOOR</span>
+          <span class="font-bold text-2xl" style={`color: ${code.accentColor}`}>KDOOR</span>
         </p>
       </div>
     </div>
   </section>
 
   <!-- Interactive Tool -->
-  <section class="bg-pastel-gray py-16">
-    <div class="max-w-3xl mx-auto px-6">
-      <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">Probier's aus</h2>
+  <section class="py-16" style={`background: ${code.accentColor}08`}>
+    <div class="max-w-3xl mx-auto px-6 md:px-12">
+      <h2 class="font-display font-bold text-2xl md:text-3xl text-center mb-10">Probier's aus</h2>
 
-      <div class="bg-white rounded-3xl p-8 shadow-soft">
+      <div class="card-static p-8">
         <div class="mb-6">
-          <label class="block text-sm font-semibold text-gray-700 mb-2">Deine Nachricht</label>
+          <label class="block text-sm font-semibold text-text-primary mb-2">Deine Nachricht</label>
           <input type="text" id="caesar-input" placeholder="Schreibe hier deine geheime Nachricht..."
-                 class="tool-input" maxlength="100" />
+                 class="tool-input" style={`--tw-ring-color: ${code.accentColor}30; border-color: #E2E8F0`}
+                 maxlength="100" />
         </div>
 
         <div class="mb-8">
-          <label class="block text-sm font-semibold text-gray-700 mb-2">
-            Verschiebung: <span id="shift-display" class="text-apple-orange">3</span>
+          <label class="block text-sm font-semibold text-text-primary mb-2">
+            Verschiebung: <span id="shift-display" style={`color: ${code.accentColor}`}>3</span>
           </label>
-          <input type="range" id="caesar-shift" min="1" max="25" value="3" />
+          <input type="range" id="caesar-shift" min="1" max="25" value="3"
+                 style={`accent-color: ${code.accentColor}`} />
         </div>
 
-        <div class="flex gap-3 mb-8 flex-wrap">
-          <button id="btn-encrypt" class="btn btn-orange">
-            Verschlüsseln
-          </button>
-          <button id="btn-decrypt" class="btn btn-indigo">
-            Entschlüsseln
-          </button>
+        <!-- Segmented Control -->
+        <div class="segmented-control mb-8">
+          <button id="btn-encrypt" class="active">Verschlüsseln</button>
+          <button id="btn-decrypt">Entschlüsseln</button>
         </div>
 
         <div>
-          <label class="block text-sm font-semibold text-gray-700 mb-2">Ergebnis</label>
-          <div id="caesar-output" class="tool-output text-xl font-semibold text-apple-orange text-center">
+          <label class="block text-sm font-semibold text-text-primary mb-2">Ergebnis</label>
+          <div id="caesar-output" class="tool-output text-xl font-semibold text-center"
+               style={`background: ${code.accentColor}10; border-left: 4px solid ${code.accentColor}; color: ${code.accentColor}`}>
             …
           </div>
         </div>
       </div>
 
       <!-- Alphabet display -->
-      <div class="mt-8 bg-white rounded-3xl p-6 shadow-soft">
-        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4 text-center">Alphabet-Zuordnung</h3>
+      <div class="card-static mt-6 p-6">
+        <h3 class="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4 text-center">Alphabet-Zuordnung</h3>
         <div id="alphabet-display" class="grid grid-cols-13 gap-1 max-w-2xl mx-auto"></div>
       </div>
     </div>
   </section>
 
   <!-- Challenge -->
-  <section class="section max-w-3xl mx-auto px-6">
-    <div class="card text-center">
-      <h2 class="text-2xl font-bold mb-4">🏆 Herausforderung</h2>
-      <p class="text-gray-500 mb-6">Entschlüssle diese Nachricht — Verschiebung ist <strong class="text-gray-900">7</strong>:</p>
-      <p class="text-2xl md:text-3xl font-mono font-bold text-apple-indigo bg-pastel-indigo rounded-2xl p-6">
+  <section class="max-w-content mx-auto px-6 md:px-12 py-16">
+    <div class="card-static max-w-3xl mx-auto text-center p-8">
+      <h2 class="font-display font-bold text-2xl mb-4">🏆 Herausforderung</h2>
+      <p class="text-text-secondary mb-6">Entschlüssle diese Nachricht — Verschiebung ist <strong class="text-text-primary">7</strong>:</p>
+      <p class="text-2xl md:text-3xl font-mono font-bold rounded-xl p-6"
+         style={`color: ${code.accentColor}; background: ${code.accentColorLight}`}>
         NLKPTLU JLOLPT
       </p>
       <details class="mt-6">
-        <summary class="cursor-pointer text-apple-blue font-semibold hover:underline text-sm">Lösung anzeigen</summary>
+        <summary class="cursor-pointer font-semibold hover:underline text-sm" style={`color: ${code.accentColor}`}>Lösung anzeigen</summary>
         <p class="mt-3 text-lg font-semibold">GEHEIME CODES 🎉</p>
       </details>
     </div>
   </section>
 
-  <script>
+  <script define:vars={{ accentColor: code.accentColor }}>
     const ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const input = document.getElementById('caesar-input') as HTMLInputElement;
-    const shift = document.getElementById('caesar-shift') as HTMLInputElement;
-    const shiftDisplay = document.getElementById('shift-display')!;
-    const output = document.getElementById('caesar-output')!;
-    const alphaDisplay = document.getElementById('alphabet-display')!;
+    const input = document.getElementById('caesar-input');
+    const shift = document.getElementById('caesar-shift');
+    const shiftDisplay = document.getElementById('shift-display');
+    const output = document.getElementById('caesar-output');
+    const alphaDisplay = document.getElementById('alphabet-display');
+    const btnEncrypt = document.getElementById('btn-encrypt');
+    const btnDecrypt = document.getElementById('btn-decrypt');
+    let mode = 'encrypt';
 
-    function caesarShift(text: string, n: number, decrypt = false): string {
+    function caesarShift(text, n, decrypt = false) {
       if (decrypt) n = 26 - n;
       return text.toUpperCase().split('').map(c => {
         const i = ALPHA.indexOf(c);
@@ -112,25 +111,40 @@ import Layout from '../layouts/Layout.astro';
       alphaDisplay.innerHTML = ALPHA.split('').map((c, i) => {
         const shifted = ALPHA[(i + n) % 26];
         return `<div class="text-center py-1">
-          <div class="text-xs font-semibold text-gray-400">${c}</div>
+          <div class="text-xs font-semibold text-text-secondary">${c}</div>
           <div class="text-xs text-gray-300">↓</div>
-          <div class="text-xs font-bold text-apple-orange">${shifted}</div>
+          <div class="text-xs font-bold" style="color:${accentColor}">${shifted}</div>
         </div>`;
       }).join('');
     }
+
+    function doTransform() {
+      const text = input.value;
+      const n = parseInt(shift.value);
+      const result = caesarShift(text, n, mode === 'decrypt');
+      output.textContent = result || '…';
+      if (result) output.classList.add('result-appear');
+    }
+
+    btnEncrypt.addEventListener('click', () => {
+      mode = 'encrypt';
+      btnEncrypt.classList.add('active');
+      btnDecrypt.classList.remove('active');
+      doTransform();
+    });
+    btnDecrypt.addEventListener('click', () => {
+      mode = 'decrypt';
+      btnDecrypt.classList.add('active');
+      btnEncrypt.classList.remove('active');
+      doTransform();
+    });
 
     shift.addEventListener('input', () => {
       shiftDisplay.textContent = shift.value;
       updateAlpha();
     });
 
-    document.getElementById('btn-encrypt')!.addEventListener('click', () => {
-      output.textContent = caesarShift(input.value, parseInt(shift.value)) || '…';
-    });
-    document.getElementById('btn-decrypt')!.addEventListener('click', () => {
-      output.textContent = caesarShift(input.value, parseInt(shift.value), true) || '…';
-    });
-
+    input.addEventListener('input', doTransform);
     updateAlpha();
   </script>
-</Layout>
+</CodeLayout>

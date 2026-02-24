@@ -1,93 +1,94 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import CodeLayout from '../layouts/CodeLayout.astro';
+import { getCodeBySlug } from '../data/codes';
+const code = getCodeBySlug('zahlen')!;
+const funFacts = [
+  { icon: '🔢', text: 'Der Zahlen-Code ist einer der <strong class="text-white">ältesten Codes</strong> der Welt und wird heute noch in Rätseln und Schnitzeljagden verwendet.' },
+  { icon: '🧮', text: 'In der Informatik werden Buchstaben auch als Zahlen gespeichert — <strong class="text-white">ASCII</strong> nennt man dieses System.' },
+];
 ---
-<Layout title="Zahlen-Code" emoji="🔢">
-  <section class="section text-center max-w-3xl mx-auto px-6 pb-12">
-    <div class="text-6xl mb-6 animate-fade-in">🔢</div>
-    <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-      <span class="gradient-text">Zahlen-Code</span>
-    </h1>
-    <p class="text-lg text-gray-500 max-w-xl mx-auto">
-      Der einfachste Code der Welt — jeder Buchstabe bekommt seine Nummer im Alphabet.
-    </p>
-  </section>
-
+<CodeLayout code={code} funFacts={funFacts}>
   <!-- Table -->
-  <section class="max-w-4xl mx-auto px-6 mb-16">
-    <div class="card">
-      <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-6 text-center">Die Zuordnung</h2>
+  <section class="max-w-content mx-auto px-6 md:px-12 py-16">
+    <div class="card-static max-w-4xl mx-auto p-8">
+      <h2 class="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-6 text-center">Die Zuordnung</h2>
       <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-13 gap-2">
         {Array.from({length: 26}, (_, i) => {
           const letter = String.fromCharCode(65 + i);
           return (
-            <div class="bg-pastel-green rounded-xl p-2.5 text-center">
-              <div class="text-lg font-bold text-gray-800">{letter}</div>
-              <div class="text-sm font-semibold text-apple-green">{i + 1}</div>
+            <div class="rounded-xl p-2.5 text-center" style={`background: ${code.accentColorLight}`}>
+              <div class="text-lg font-bold text-text-primary">{letter}</div>
+              <div class="text-sm font-semibold" style={`color: ${code.accentColor}`}>{i + 1}</div>
             </div>
           );
         })}
       </div>
-      <div class="bg-pastel-green rounded-2xl p-5 text-center mt-6">
+      <div class="rounded-xl p-5 text-center mt-6" style={`background: ${code.accentColorLight}`}>
         <p class="text-base">
-          <span class="text-gray-500">HALLO</span>
+          <span class="text-text-secondary">HALLO</span>
           <span class="mx-3 text-gray-300">→</span>
-          <span class="text-apple-green font-bold text-xl font-mono">8 · 1 · 12 · 12 · 15</span>
+          <span class="font-bold text-xl font-mono" style={`color: ${code.accentColor}`}>8 · 1 · 12 · 12 · 15</span>
         </p>
       </div>
     </div>
   </section>
 
   <!-- Tool -->
-  <section class="bg-pastel-gray py-16">
-    <div class="max-w-3xl mx-auto px-6">
-      <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">Zahlen-Übersetzer</h2>
+  <section class="py-16" style={`background: ${code.accentColor}08`}>
+    <div class="max-w-3xl mx-auto px-6 md:px-12">
+      <h2 class="font-display font-bold text-2xl md:text-3xl text-center mb-10">Zahlen-Übersetzer</h2>
       <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-white rounded-3xl p-6 shadow-soft">
-          <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Text → Zahlen</h3>
+        <div class="card-static p-6">
+          <h3 class="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">Text → Zahlen</h3>
           <input type="text" id="text-input" placeholder="Schreibe hier..." class="tool-input mb-3" maxlength="50" />
-          <button id="btn-to-numbers" class="btn btn-green w-full">Umwandeln</button>
-          <div id="number-output" class="tool-output mt-4 text-xl font-mono text-apple-green text-center">…</div>
+          <button id="btn-to-numbers" class="btn w-full" style={`background: ${code.accentColor}`}>Umwandeln</button>
+          <div id="number-output" class="tool-output mt-4 text-xl text-center"
+               style={`background: ${code.accentColor}10; border-left: 4px solid ${code.accentColor}; color: ${code.accentColor}`}>…</div>
         </div>
-        <div class="bg-white rounded-3xl p-6 shadow-soft">
-          <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Zahlen → Text</h3>
+        <div class="card-static p-6">
+          <h3 class="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">Zahlen → Text</h3>
           <input type="text" id="number-input" placeholder="z.B. 8-1-12-12-15" class="tool-input mb-3" />
-          <button id="btn-to-text" class="btn btn-indigo w-full">Umwandeln</button>
-          <div id="text-output" class="tool-output mt-4 text-xl font-bold text-apple-indigo text-center">…</div>
+          <button id="btn-to-text" class="btn w-full bg-primary hover:bg-primary-dark">Umwandeln</button>
+          <div id="text-output" class="tool-output mt-4 text-xl font-bold text-center"
+               style="background: #6366F110; border-left: 4px solid #6366F1; color: #6366F1;">…</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Tricks -->
-  <section class="section max-w-3xl mx-auto px-6">
-    <h2 class="text-2xl font-bold text-center mb-8">Tricks für Profis</h2>
-    <div class="space-y-4">
-      <div class="card-flat bg-pastel-orange rounded-2xl p-6">
-        <p class="font-semibold text-gray-800 mb-1">🔄 Rückwärts-Zahlen</p>
-        <p class="text-sm text-gray-500">A=26, B=25, C=24 … Z=1 — doppelt verwirrend!</p>
-      </div>
-      <div class="card-flat bg-pastel-blue rounded-2xl p-6">
-        <p class="font-semibold text-gray-800 mb-1">➕ Plus-Trick</p>
-        <p class="text-sm text-gray-500">Addiere eine geheime Zahl! Bei +5 wird A=6, B=7, C=8…</p>
-      </div>
-      <div class="card-flat bg-pastel-purple rounded-2xl p-6">
-        <p class="font-semibold text-gray-800 mb-1">✖️ Mal-Trick</p>
-        <p class="text-sm text-gray-500">Multipliziere mit 2! A=2, B=4, C=6… Knifflig!</p>
+  <section class="max-w-content mx-auto px-6 md:px-12 py-16">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="font-display font-bold text-2xl text-center mb-8">Tricks für Profis</h2>
+      <div class="space-y-4">
+        <div class="card-static p-6" style={`background: ${code.accentColorLight}`}>
+          <p class="font-semibold text-text-primary mb-1">🔄 Rückwärts-Zahlen</p>
+          <p class="text-sm text-text-secondary">A=26, B=25, C=24 … Z=1 — doppelt verwirrend!</p>
+        </div>
+        <div class="card-static p-6 bg-blue-50">
+          <p class="font-semibold text-text-primary mb-1">➕ Plus-Trick</p>
+          <p class="text-sm text-text-secondary">Addiere eine geheime Zahl! Bei +5 wird A=6, B=7, C=8…</p>
+        </div>
+        <div class="card-static p-6 bg-purple-50">
+          <p class="font-semibold text-text-primary mb-1">✖️ Mal-Trick</p>
+          <p class="text-sm text-text-secondary">Multipliziere mit 2! A=2, B=4, C=6… Knifflig!</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Challenge -->
-  <section class="bg-pastel-gray py-16">
-    <div class="max-w-3xl mx-auto px-6">
-      <div class="bg-white rounded-3xl p-8 shadow-soft text-center">
-        <h2 class="text-2xl font-bold mb-4">🏆 Herausforderung</h2>
-        <p class="text-gray-500 mb-6">Was bedeutet diese Zahlen-Nachricht?</p>
-        <p class="text-2xl font-mono font-bold text-apple-green bg-pastel-green rounded-2xl p-6">
+  <section class="py-16" style={`background: ${code.accentColor}08`}>
+    <div class="max-w-3xl mx-auto px-6 md:px-12">
+      <div class="card-static p-8 text-center">
+        <h2 class="font-display font-bold text-2xl mb-4">🏆 Herausforderung</h2>
+        <p class="text-text-secondary mb-6">Was bedeutet diese Zahlen-Nachricht?</p>
+        <p class="text-2xl font-mono font-bold rounded-xl p-6"
+           style={`color: ${code.accentColor}; background: ${code.accentColorLight}`}>
           4·21 / 2·9·19·20 / 19·21·16·5·18
         </p>
         <details class="mt-6">
-          <summary class="cursor-pointer text-apple-blue font-semibold hover:underline text-sm">Lösung anzeigen</summary>
+          <summary class="cursor-pointer font-semibold hover:underline text-sm" style={`color: ${code.accentColor}`}>Lösung anzeigen</summary>
           <p class="mt-3 text-lg font-semibold">DU BIST SUPER! 🌟</p>
         </details>
       </div>
@@ -96,24 +97,24 @@ import Layout from '../layouts/Layout.astro';
 
   <script>
     const ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    document.getElementById('btn-to-numbers')!.addEventListener('click', () => {
-      const text = (document.getElementById('text-input') as HTMLInputElement).value.toUpperCase();
+    document.getElementById('btn-to-numbers').addEventListener('click', () => {
+      const text = document.getElementById('text-input').value.toUpperCase();
       const result = text.split('').map(c => {
         if (c === ' ') return '/';
         const i = ALPHA.indexOf(c);
         return i >= 0 ? String(i + 1) : c;
       }).join('·').replace(/·\/·/g, ' / ');
-      document.getElementById('number-output')!.textContent = result || '…';
+      document.getElementById('number-output').textContent = result || '…';
     });
-    document.getElementById('btn-to-text')!.addEventListener('click', () => {
-      const nums = (document.getElementById('number-input') as HTMLInputElement).value;
+    document.getElementById('btn-to-text').addEventListener('click', () => {
+      const nums = document.getElementById('number-input').value;
       const parts = nums.split(/[\s\/]+/).map(word =>
         word.split(/[-·]/).map(n => {
           const num = parseInt(n);
           return num >= 1 && num <= 26 ? ALPHA[num - 1] : '?';
         }).join('')
       ).join(' ');
-      document.getElementById('text-output')!.textContent = parts || '…';
+      document.getElementById('text-output').textContent = parts || '…';
     });
   </script>
-</Layout>
+</CodeLayout>

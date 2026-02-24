@@ -1,40 +1,52 @@
 ---
-import Layout from '../layouts/Layout.astro';
-const codes = [
-  { href: "/caesar", emoji: "🏛️", title: "Caesar-Chiffre", desc: "Verschiebe das Alphabet wie ein römischer Kaiser.", bg: "bg-pastel-orange", accent: "text-apple-orange" },
-  { href: "/morse", emoji: "📡", title: "Morse-Code", desc: "Punkte und Striche — die Sprache der Funker.", bg: "bg-pastel-blue", accent: "text-apple-blue" },
-  { href: "/zahlen", emoji: "🔢", title: "Zahlen-Code", desc: "A=1, B=2 — verschlüssle mit Mathe.", bg: "bg-pastel-green", accent: "text-apple-green" },
-  { href: "/spiegel", emoji: "🪞", title: "Spiegelschrift", desc: "Schreibe rückwärts wie Leonardo da Vinci.", bg: "bg-pastel-pink", accent: "text-apple-pink" },
-  { href: "/pigpen", emoji: "🏗️", title: "Freimaurer-Chiffre", desc: "Geheime Zeichen statt Buchstaben.", bg: "bg-pastel-indigo", accent: "text-apple-indigo" },
-  { href: "/skytale", emoji: "📜", title: "Skytale", desc: "Die antike Verschlüsselung der Spartaner.", bg: "bg-pastel-purple", accent: "text-apple-purple" },
-  { href: "/emoji", emoji: "😎", title: "Emoji-Code", desc: "Erstelle deine eigene Geheimsprache.", bg: "bg-pastel-yellow", accent: "text-apple-orange" },
-];
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { codes } from '../data/codes';
 ---
-<Layout title="Geheimcodes & Chiffren" emoji="🏠">
+<BaseLayout title="Geheimcodes & Chiffren">
   <!-- Hero -->
-  <section class="section text-center max-w-3xl mx-auto px-6">
-    <div class="text-7xl md:text-8xl mb-8 animate-float">🕵️</div>
-    <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
-      Entdecke die Welt der<br>
-      <span class="gradient-text">Geheimcodes.</span>
-    </h1>
-    <p class="text-xl md:text-2xl text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
-      Seit Tausenden von Jahren verschlüsseln Menschen ihre Nachrichten.
-      Lerne die coolsten Codes kennen — und probiere sie selbst aus.
-    </p>
+  <section class="py-16 md:py-28 text-center max-w-content mx-auto px-6 md:px-12">
+    <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16">
+      <div class="flex-1 text-center md:text-left">
+        <h1 class="font-display font-extrabold text-4xl md:text-6xl tracking-tight mb-6 leading-tight">
+          Entdecke die Welt der<br>
+          <span class="gradient-text">Geheimcodes.</span>
+        </h1>
+        <p class="text-xl text-text-secondary leading-relaxed max-w-xl mb-8">
+          Seit Tausenden von Jahren verschlüsseln Menschen ihre Nachrichten.
+          Lerne die coolsten Codes kennen — und probiere sie selbst aus.
+        </p>
+        <a href="#codes" class="btn bg-primary hover:bg-primary-dark text-white text-base px-8 py-4">
+          Starte deine Mission 🚀
+        </a>
+      </div>
+      <div class="w-56 h-56 md:w-80 md:h-80 rounded-3xl bg-primary/5 flex items-center justify-center animate-float">
+        <span class="text-8xl md:text-9xl">🕵️</span>
+      </div>
+    </div>
   </section>
 
-  <!-- Code Cards -->
-  <section class="max-w-5xl mx-auto px-6 pb-16">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 stagger">
+  <!-- Code Cards Grid -->
+  <section id="codes" class="max-w-content mx-auto px-6 md:px-12 pb-20">
+    <h2 class="font-display font-bold text-3xl md:text-4xl text-center mb-12">Wähle deinen Code</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 stagger">
       {codes.map(code => (
-        <a href={code.href} class="group block rounded-3xl overflow-hidden bg-white shadow-soft hover:shadow-lifted transition-all duration-300 hover:-translate-y-1">
-          <div class={`${code.bg} p-8 flex items-center justify-center`}>
-            <span class="text-6xl group-hover:scale-110 transition-transform duration-300">{code.emoji}</span>
+        <a href={`/${code.slug}`} class="group block bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-lifted transition-all duration-300 hover:-translate-y-2"
+           style={`border-top: 4px solid ${code.accentColor}`}>
+          <div class="p-4 flex items-center justify-center" style={`background: ${code.accentColorLight}`}>
+            <span class="text-6xl group-hover:scale-110 transition-transform duration-300">{code.icon}</span>
           </div>
           <div class="p-6">
-            <h2 class={`text-lg font-bold mb-1 ${code.accent}`}>{code.title}</h2>
-            <p class="text-sm text-gray-500">{code.desc}</p>
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="font-display font-bold text-lg" style={`color: ${code.accentColor}`}>{code.title}</h3>
+              <div class="flex gap-0.5">
+                {Array.from({length: 3}, (_, i) => (
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill={i < code.difficulty ? code.accentColor : '#E2E8F0'}>
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                  </svg>
+                ))}
+              </div>
+            </div>
+            <p class="text-sm text-text-secondary">{code.shortDesc}</p>
           </div>
         </a>
       ))}
@@ -42,27 +54,27 @@ const codes = [
   </section>
 
   <!-- Fun Facts -->
-  <section class="bg-pastel-gray py-20">
-    <div class="max-w-4xl mx-auto px-6">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 tracking-tight">Wusstest du schon?</h2>
+  <section class="bg-surface-dark py-20">
+    <div class="max-w-content mx-auto px-6 md:px-12">
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-white text-center mb-12">Wusstest du schon?</h2>
       <div class="grid sm:grid-cols-2 gap-6 stagger">
-        <div class="card-flat bg-white shadow-soft rounded-3xl p-8">
-          <p class="text-3xl mb-3">🏛️</p>
-          <p class="text-base text-gray-600"><strong class="text-gray-900">Julius Caesar</strong> hat vor über 2.000 Jahren geheime Nachrichten an seine Generäle geschickt.</p>
+        <div class="bg-white/5 backdrop-blur rounded-2xl p-8 border border-white/10">
+          <span class="text-3xl mb-3 block">🏛️</span>
+          <p class="text-sm text-gray-300 leading-relaxed"><strong class="text-white">Julius Caesar</strong> hat vor über 2.000 Jahren geheime Nachrichten an seine Generäle geschickt.</p>
         </div>
-        <div class="card-flat bg-white shadow-soft rounded-3xl p-8">
-          <p class="text-3xl mb-3">🐝</p>
-          <p class="text-base text-gray-600">Sogar <strong class="text-gray-900">Bienen</strong> kommunizieren mit einem Code — sie tanzen, um den Weg zu Blumen zu zeigen.</p>
+        <div class="bg-white/5 backdrop-blur rounded-2xl p-8 border border-white/10">
+          <span class="text-3xl mb-3 block">🐝</span>
+          <p class="text-sm text-gray-300 leading-relaxed">Sogar <strong class="text-white">Bienen</strong> kommunizieren mit einem Code — sie tanzen, um den Weg zu Blumen zu zeigen.</p>
         </div>
-        <div class="card-flat bg-white shadow-soft rounded-3xl p-8">
-          <p class="text-3xl mb-3">💻</p>
-          <p class="text-base text-gray-600">Dein <strong class="text-gray-900">Handy</strong> verschlüsselt jede Nachricht automatisch — sonst könnte jeder mitlesen.</p>
+        <div class="bg-white/5 backdrop-blur rounded-2xl p-8 border border-white/10">
+          <span class="text-3xl mb-3 block">💻</span>
+          <p class="text-sm text-gray-300 leading-relaxed">Dein <strong class="text-white">Handy</strong> verschlüsselt jede Nachricht automatisch — sonst könnte jeder mitlesen.</p>
         </div>
-        <div class="card-flat bg-white shadow-soft rounded-3xl p-8">
-          <p class="text-3xl mb-3">🏴‍☠️</p>
-          <p class="text-base text-gray-600"><strong class="text-gray-900">Piraten</strong> benutzten Geheimcodes auf ihren Schatzkarten, damit nur sie den Schatz finden konnten.</p>
+        <div class="bg-white/5 backdrop-blur rounded-2xl p-8 border border-white/10">
+          <span class="text-3xl mb-3 block">🏴‍☠️</span>
+          <p class="text-sm text-gray-300 leading-relaxed"><strong class="text-white">Piraten</strong> benutzten Geheimcodes auf ihren Schatzkarten, damit nur sie den Schatz finden konnten.</p>
         </div>
       </div>
     </div>
   </section>
-</Layout>
+</BaseLayout>

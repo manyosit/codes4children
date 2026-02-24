@@ -4,70 +4,59 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', 'sans-serif'],
-        display: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'sans-serif'],
-        mono: ['SF Mono', 'Fira Code', 'monospace'],
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        display: ['Space Grotesk', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
       },
       colors: {
-        apple: {
-          blue: '#007AFF',
-          indigo: '#5856D6',
-          purple: '#AF52DE',
-          pink: '#FF2D55',
-          red: '#FF3B30',
-          orange: '#FF9500',
-          yellow: '#FFCC00',
-          green: '#34C759',
-          teal: '#5AC8FA',
-          mint: '#00C7BE',
+        primary: {
+          DEFAULT: '#6366F1',
+          light: '#A5B4FC',
+          dark: '#4F46E5',
         },
-        // Soft pastels for backgrounds
-        pastel: {
-          blue: '#E8F1FF',
-          indigo: '#EEEDFA',
-          purple: '#F5EEFB',
-          pink: '#FFECF0',
-          orange: '#FFF3E6',
-          yellow: '#FFF9E0',
-          green: '#E8FAF0',
-          teal: '#E6F7FC',
-          gray: '#F5F5F7',
-        }
+        secondary: {
+          DEFAULT: '#34D399',
+          light: '#6EE7B7',
+          dark: '#059669',
+        },
+        accent: {
+          DEFAULT: '#F59E0B',
+          light: '#FCD34D',
+        },
+        danger: '#F87171',
+        surface: {
+          DEFAULT: '#FFFFFF',
+          dark: '#1E293B',
+          darker: '#0F172A',
+        },
+        text: {
+          primary: '#0F172A',
+          secondary: '#64748B',
+          light: '#E2E8F0',
+        },
+        // Per-code accent colors
+        code: {
+          caesar: '#8B5CF6',
+          morse: '#3B82F6',
+          zahlen: '#10B981',
+          spiegel: '#EC4899',
+          pigpen: '#F59E0B',
+          skytale: '#14B8A6',
+          emoji: '#F97316',
+        },
       },
       borderRadius: {
-        '2xl': '1rem',
-        '3xl': '1.5rem',
-        '4xl': '2rem',
+        'xl': '12px',
+        '2xl': '16px',
       },
-      animation: {
-        'fade-in': 'fadeIn 0.6s ease-out',
-        'fade-up': 'fadeUp 0.6s ease-out',
-        'scale-in': 'scaleIn 0.4s ease-out',
-        'float': 'float 6s ease-in-out infinite',
-      },
-      keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        fadeUp: {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        scaleIn: {
-          '0%': { opacity: '0', transform: 'scale(0.95)' },
-          '100%': { opacity: '1', transform: 'scale(1)' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-8px)' },
-        },
+      maxWidth: {
+        'content': '1200px',
       },
       boxShadow: {
-        'soft': '0 2px 20px rgba(0,0,0,0.06)',
-        'medium': '0 4px 30px rgba(0,0,0,0.08)',
-        'lifted': '0 8px 40px rgba(0,0,0,0.12)',
-      }
+        'soft': '0 1px 3px rgba(0,0,0,0.08)',
+        'medium': '0 4px 20px rgba(0,0,0,0.1)',
+        'lifted': '0 8px 30px rgba(0,0,0,0.12)',
+      },
     },
   },
   plugins: [],
