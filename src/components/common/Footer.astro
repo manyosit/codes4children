@@ -25,7 +25,7 @@ import { codes } from '../../data/codes';
           {codes.map(code => (
             <li>
               <a href={`/${code.slug}`} class="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2">
-                <span>{code.icon}</span> {code.title}
+                <img src={`/icons/${code.slug}.png`} alt="" class="w-5 h-5 object-contain" /> {code.title}
               </a>
             </li>
           ))}
