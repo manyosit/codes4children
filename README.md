@@ -89,6 +89,14 @@ Kurz gesagt: Ihr dürft den Code frei verwenden, kopieren, verändern und weiter
 
 ---
 
+## ✍️ Autor
+
+**Robert Hannemann** — IT-Berater & Papa einer neugierigen Codeknackerin
+
+Erstellt mit Liebe bei der [manyos technology GmbH](https://manyos.it).
+
+---
+
 <p align="center">
   Mit 💜 gemacht für neugierige Kinder<br>
   <strong>Codes4Kids</strong> — Geheimcodes für schlaue Köpfe! 🧠
