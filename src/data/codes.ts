@@ -89,6 +89,17 @@ export const codes: CodeInfo[] = [
     metaDescription: 'Erstelle deine eigene Emoji-Geheimsprache. Interaktiver Emoji-Code für Kinder.',
   },
   {
+    title: 'NATO-Alphabet',
+    slug: 'nato',
+    description: 'Buchstabiere wie ein Pilot! Jeder Buchstabe bekommt ein eindeutiges Wort.',
+    shortDesc: 'Buchstabiere wie ein Pilot!',
+    accentColor: '#65A30D',
+    accentColorLight: '#ECFCCB',
+    difficulty: 1,
+    icon: '🎖️',
+    metaDescription: 'Lerne das NATO-Buchstabieralphabet und buchstabiere wie Piloten und Polizei. Interaktiv für Kinder.',
+  },
+  {
     title: 'Komprimierung',
     slug: 'komprimierung',
     description: 'Mach große Dateien klein! Lerne, wie Computer Daten schrumpfen lassen — mit cleveren Wörterbuch-Tricks.',

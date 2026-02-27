@@ -1,0 +1,173 @@
+---
+import CodeLayout from '../layouts/CodeLayout.astro';
+import { getCodeBySlug } from '../data/codes';
+const code = getCodeBySlug('nato')!;
+const funFacts = [
+  { icon: '✈️', text: 'Piloten und Polizei benutzen das NATO-Alphabet <strong class="text-white">jeden Tag</strong>, damit es am Funk keine Verwechslungen gibt.' },
+  { icon: '🌍', text: 'Das NATO-Alphabet funktioniert in <strong class="text-white">allen Sprachen</strong> gleich — egal ob Englisch, Deutsch oder Japanisch.' },
+  { icon: '📜', text: 'Vor dem NATO-Alphabet gab es andere Versionen wie <strong class="text-white">Able Baker Charlie</strong> — aber die waren zu verwirrend!' },
+];
+
+const natoAlphabet: Record<string, string> = {
+  A: 'Alpha', B: 'Bravo', C: 'Charlie', D: 'Delta', E: 'Echo', F: 'Foxtrot',
+  G: 'Golf', H: 'Hotel', I: 'India', J: 'Juliet', K: 'Kilo', L: 'Lima',
+  M: 'Mike', N: 'November', O: 'Oscar', P: 'Papa', Q: 'Quebec', R: 'Romeo',
+  S: 'Sierra', T: 'Tango', U: 'Uniform', V: 'Victor', W: 'Whiskey', X: 'X-ray',
+  Y: 'Yankee', Z: 'Zulu',
+};
+
+const natoNumbers: Record<string, string> = {
+  '0': 'Zero', '1': 'One', '2': 'Two', '3': 'Three', '4': 'Four',
+  '5': 'Five', '6': 'Six', '7': 'Seven', '8': 'Eight', '9': 'Niner',
+};
+---
+<CodeLayout code={code} funFacts={funFacts}>
+
+  <!-- So funktioniert's -->
+  <section class="max-w-content mx-auto px-6 md:px-12 py-16">
+    <div class="card-static max-w-4xl mx-auto p-8">
+      <h2 class="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-2 text-center">So funktioniert's</h2>
+      <p class="text-text-secondary text-center mb-8 max-w-2xl mx-auto">
+        Im NATO-Alphabet bekommt jeder Buchstabe ein eigenes, unverwechselbares Wort.
+        So kann man am Funk ganz klar buchstabieren — ohne dass sich Buchstaben ähnlich anhören.
+      </p>
+
+      <!-- Alphabet Grid -->
+      <h3 class="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4 text-center">Die komplette Zuordnung</h3>
+      <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-2 mb-6">
+        {Object.entries(natoAlphabet).map(([letter, word]) => (
+          <div class="rounded-xl p-3 text-center" style={`background: ${code.accentColorLight}`}>
+            <div class="text-lg font-bold text-text-primary">{letter}</div>
+            <div class="text-sm font-semibold" style={`color: ${code.accentColor}`}>{word}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Numbers Grid -->
+      <h3 class="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4 text-center">Zahlen</h3>
+      <div class="grid grid-cols-5 sm:grid-cols-5 md:grid-cols-10 gap-2 mb-6">
+        {Object.entries(natoNumbers).map(([digit, word]) => (
+          <div class="rounded-xl p-3 text-center" style={`background: ${code.accentColorLight}`}>
+            <div class="text-lg font-bold text-text-primary">{digit}</div>
+            <div class="text-sm font-semibold" style={`color: ${code.accentColor}`}>{word}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Example -->
+      <div class="rounded-xl p-5 text-center" style={`background: ${code.accentColorLight}`}>
+        <p class="text-base">
+          <span class="text-text-secondary">MAX</span>
+          <span class="mx-3 text-gray-300">→</span>
+          <span class="font-bold text-xl" style={`color: ${code.accentColor}`}>Mike – Alpha – X-ray</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Die Geschichte dahinter -->
+  <section class="bg-surface-dark py-16 md:py-20">
+    <div class="max-w-content mx-auto px-6 md:px-12">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="font-display font-bold text-2xl md:text-3xl text-white text-center mb-8">📖 Die Geschichte dahinter</h2>
+        <div class="bg-white/5 backdrop-blur rounded-2xl p-8 border border-white/10">
+          <p class="text-gray-300 leading-relaxed mb-4">
+            Stell dir vor: Ein Pilot fliegt durch dichten Nebel und muss dem Tower am Boden seinen Standort durchgeben. Er sagt: <em class="text-white">"Ich bin bei Punkt B wie Berta!"</em> Doch der Funker am Boden versteht: <em class="text-white">"Punkt D wie Dora!"</em> — und schickt den Piloten in die völlig falsche Richtung. 😱
+          </p>
+          <p class="text-gray-300 leading-relaxed mb-4">
+            Solche Verwechslungen passierten in den <strong class="text-white">1940er und 1950er Jahren</strong> ständig! Buchstaben wie B und D, M und N oder S und F klingen am Funk furchtbar ähnlich — besonders wenn es rauscht und knackt.
+          </p>
+          <p class="text-gray-300 leading-relaxed mb-4">
+            Zuerst versuchte man es mit <strong class="text-white">"Able, Baker, Charlie"</strong> — einem amerikanischen Buchstabieralphabet. Aber das funktionierte nicht für Menschen, die kein Englisch sprachen. Ein französischer Pilot konnte sich "Baker" einfach nicht merken!
+          </p>
+          <p class="text-gray-300 leading-relaxed mb-4">
+            Also setzte sich die <strong class="text-white">NATO</strong> (ein Bündnis vieler Länder) zusammen und entwickelte ein Alphabet, das in <strong class="text-white">allen Sprachen</strong> funktioniert. Die Wörter wurden sorgfältig ausgewählt: Sie mussten leicht auszusprechen sein, egal ob jemand Englisch, Spanisch oder Arabisch spricht.
+          </p>
+          <p class="text-gray-300 leading-relaxed">
+            Seit <strong class="text-white">1956</strong> wird dieses Alphabet weltweit benutzt — von Piloten, der Polizei, beim Militär und sogar in Callcentern. Wenn du mal dein Kennzeichen am Telefon durchgeben musst, weißt du jetzt wie es geht! ✈️
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Probier's aus -->
+  <section class="py-16" style={`background: ${code.accentColor}08`}>
+    <div class="max-w-3xl mx-auto px-6 md:px-12">
+      <h2 class="font-display font-bold text-2xl md:text-3xl text-center mb-10">Probier's aus!</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Text → NATO -->
+        <div class="card-static p-6">
+          <h3 class="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">Text → NATO</h3>
+          <input type="text" id="text-input" placeholder="z.B. deinen Namen…" class="tool-input mb-3" maxlength="30" />
+          <button id="btn-to-nato" class="btn w-full" style={`background: ${code.accentColor}`}>Buchstabieren</button>
+          <div id="nato-output" class="tool-output mt-4 text-lg text-center leading-relaxed"
+               style={`background: ${code.accentColor}10; border-left: 4px solid ${code.accentColor}; color: ${code.accentColor}`}>…</div>
+        </div>
+        <!-- NATO → Text -->
+        <div class="card-static p-6">
+          <h3 class="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">NATO → Text</h3>
+          <input type="text" id="nato-input" placeholder="z.B. Mike Alpha X-ray" class="tool-input mb-3" />
+          <button id="btn-to-text" class="btn w-full bg-primary hover:bg-primary-dark">Entschlüsseln</button>
+          <div id="text-output" class="tool-output mt-4 text-xl font-bold text-center"
+               style="background: #6366F110; border-left: 4px solid #6366F1; color: #6366F1;">…</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Challenge -->
+  <section class="max-w-content mx-auto px-6 md:px-12 py-16">
+    <div class="max-w-3xl mx-auto">
+      <div class="card-static p-8 text-center">
+        <h2 class="font-display font-bold text-2xl mb-4">🏆 Herausforderung</h2>
+        <p class="text-text-secondary mb-6">Was ergibt diese NATO-Buchstabierung?</p>
+        <p class="text-xl font-bold rounded-xl p-6"
+           style={`color: ${code.accentColor}; background: ${code.accentColorLight}`}>
+          Sierra – Papa – India – Oscar – November
+        </p>
+        <details class="mt-6">
+          <summary class="cursor-pointer font-semibold hover:underline text-sm" style={`color: ${code.accentColor}`}>Lösung anzeigen</summary>
+          <p class="mt-3 text-lg font-semibold">SPION! 🕵️</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const NATO: Record<string, string> = {
+      A: 'Alpha', B: 'Bravo', C: 'Charlie', D: 'Delta', E: 'Echo', F: 'Foxtrot',
+      G: 'Golf', H: 'Hotel', I: 'India', J: 'Juliet', K: 'Kilo', L: 'Lima',
+      M: 'Mike', N: 'November', O: 'Oscar', P: 'Papa', Q: 'Quebec', R: 'Romeo',
+      S: 'Sierra', T: 'Tango', U: 'Uniform', V: 'Victor', W: 'Whiskey', X: 'X-ray',
+      Y: 'Yankee', Z: 'Zulu',
+    };
+    const NATO_NUM: Record<string, string> = {
+      '0': 'Zero', '1': 'One', '2': 'Two', '3': 'Three', '4': 'Four',
+      '5': 'Five', '6': 'Six', '7': 'Seven', '8': 'Eight', '9': 'Niner',
+    };
+    const REVERSE: Record<string, string> = {};
+    for (const [k, v] of Object.entries(NATO)) REVERSE[v.toUpperCase()] = k;
+    for (const [k, v] of Object.entries(NATO_NUM)) REVERSE[v.toUpperCase()] = k;
+
+    document.getElementById('btn-to-nato')!.addEventListener('click', () => {
+      const text = (document.getElementById('text-input') as HTMLInputElement).value.toUpperCase();
+      const words: string[] = [];
+      for (const ch of text) {
+        if (ch === ' ') { words.push('/'); continue; }
+        if (NATO[ch]) { words.push(NATO[ch]); continue; }
+        if (NATO_NUM[ch]) { words.push(NATO_NUM[ch]); continue; }
+        words.push(ch);
+      }
+      const result = words.join(' – ').replace(/ – \/ – /g, '  /  ');
+      document.getElementById('nato-output')!.textContent = result || '…';
+    });
+
+    document.getElementById('btn-to-text')!.addEventListener('click', () => {
+      const input = (document.getElementById('nato-input') as HTMLInputElement).value.trim();
+      const parts = input.split(/[\s,\-–]+/).filter(Boolean);
+      const letters = parts.map(w => REVERSE[w.toUpperCase()] || '?').join('');
+      document.getElementById('text-output')!.textContent = letters || '…';
+    });
+  </script>
+</CodeLayout>
